@@ -364,7 +364,7 @@ that purpose.
 : OPTIONAL. A space-separated list of completion-mode values registered
   in the "OAuth Completion Mode Values" registry ({{iana-considerations}}).
   Order is not significant, and values MUST NOT be repeated. This
-  specification defines two values, `deferred` and `deferred_interactive`. 
+  specification defines two values, `deferred` and `deferred_interactive`.
   When `deferred` is present in the list, the client signals that it is
   willing to accept a deferred response from the authorization server in
   place of an immediate token response or error. When
