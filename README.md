@@ -4,16 +4,16 @@
 
 This is the working area for the individual Internet-Draft, "Deferred Token Response".
 
-* [Editor's Copy](https://maxwellgerber.github.io/deferred-token-response/#go.draft-ietf-oauth-deferred-token-response.html)
+* [Editor's Copy](https://drafts.oauth.net/oauth-deferred-token-response/draft-ietf-oauth-deferred-token-response.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-oauth-deferred-token-response)
 * [Individual Draft](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-deferred-token-response)
-* [Compare Editor's Copy to Individual Draft](https://maxwellgerber.github.io/deferred-token-response/#go.draft-ietf-oauth-deferred-token-response.diff)
+* [Compare Editor's Copy to Individual Draft](https://oauth-wg.github.io/oauth-deferred-token-response/#go.draft-ietf-oauth-deferred-token-response.diff)
 
 
 ## Contributing
 
 See the
-[guidelines for contributions](https://github.com/oauth-wg/deferred-token-response/blob/main/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/oauth-wg/oauth-deferred-token-response/blob/main/CONTRIBUTING.md).
 
 The contributing file also has tips on how to make contributions, if you
 don't already know how to do that.
