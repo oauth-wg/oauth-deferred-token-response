@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-09-20T02:20:37.647345+00:00",
+  "timestamp": "2026-09-22T00:09:42.697816+00:00",
   "repo": "oauth-wg/oauth-deferred-token-response",
   "labels": [
     {
@@ -3264,6 +3264,48 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 73,
+      "id": "PR_kwDOSeoW_M8AAAABEaV5nA",
+      "title": "Update links in README.md for accuracy",
+      "url": "https://github.com/oauth-wg/oauth-deferred-token-response/pull/73",
+      "state": "MERGED",
+      "author": "gniero",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixing broken references in readme links",
+      "createdAt": "2026-09-21T11:36:37Z",
+      "updatedAt": "2026-09-21T14:32:01Z",
+      "baseRepository": "oauth-wg/oauth-deferred-token-response",
+      "baseRefName": "main",
+      "baseRefOid": "d9d16c6e4f91f527655b6e2d500482af1b02d276",
+      "headRepository": "oauth-wg/oauth-deferred-token-response",
+      "headRefName": "fix-readme-links",
+      "headRefOid": "b0d99ccf28ee639944f06183219a72abb8e7146e",
+      "closedAt": "2026-09-21T14:32:01Z",
+      "mergedAt": "2026-09-21T14:32:00Z",
+      "mergedBy": "gniero",
+      "mergeCommit": {
+        "oid": "173bdf074b8d016503119c6e0e963370ce302acb"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOSeoW_M8AAAABOfSx8A",
+          "commit": {
+            "abbreviatedOid": "b0d99cc"
+          },
+          "author": "max-stytch",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-09-21T13:40:59Z",
+          "updatedAt": "2026-09-21T13:40:59Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
