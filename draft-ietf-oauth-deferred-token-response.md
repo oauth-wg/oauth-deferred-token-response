@@ -210,12 +210,13 @@ The flow proceeds entirely through the originating grant's existing
 endpoints. A grant becomes deferred when:
 
 1. The client signals willingness to accept a deferred response by
-   including `deferred` among the values of the `completion_mode`
+   including one of the supported values of the `completion_mode`
    parameter on the originating grant's token endpoint request.
 2. The authorization server elects, on that token endpoint request,
-   to return a deferred response in place of the normal token
-   response. The deferred response carries a `deferral_code` instead
-   of an access token.
+   to require interaction, inform a pending interaction by the 
+   end-user or return a deferred response in place of the normal 
+   token response. The deferred response carries a `deferral_code`
+   instead of an access token.
 3. The client polls the token endpoint with the `deferral_code`
    until the authorization server returns the final token response, or
    optionally receives a callback notification when the request
@@ -239,34 +240,51 @@ authorization `code`) regardless of whether the request will be
 deferred.
 
 ~~~
-+--------+                                  +-----+              +----------+
-|        |                                  |     |              |          |
-|        |--(1) Auth Request--------------->|     |              |          |
-|        |   (completion_mode=deferred)     |     |              |          |
-|        |                                  |     |<-(2) Obtain->| End-User |
-|        |                                  |     |    input     |          |
-|        |<-(3) Auth Response (code)--------|     |              |          |
-|        |                                  |     |              +----------+
-|        |--(4) Token Request-------------->|     |
-|        | (code, completion_mode=deferred) |     |
-|        |<-(5) Deferred Response-----------|     |
-|        |   (deferral_code)                |     |
-|        |                                  |     |---------+
-| Client |                                  | AS  |         |
-|        |--(6) Token Request-------------->|     |         |
-|        |   (deferral_code)                |     | (7) Complete request
-|        |<-Token Response------------------|     |         |
-|        |                                  |     |<--------+
-|        |               ...                |     |
-|        |                                  |     |
-|        |<-(8) Optional Callback-----------|     |
-|        |                                  |     |
-|        |--(6) Token Request-------------->|     |
-|        |   (deferral_code)                |     |
-|        |<-Token Response------------------|     |
-|        |                                  |     |
-+--------+                                  +-----+
++--------+                             +----+              +--------+
+|        |                             |    |              |        |
+|        |..(1) Pre-token Request.....>|    |              |        |
+|        |  (completion_mode=deferred) |    |              |        |
+|        |                             |    |              |        |
+|        |--(2) Token Request--------->|    |              |        |
+|        |  (completion_mode=deferred) |    |              |        |
+|        |<-(3) Deferred Response------|    |              |        |
+|        |  (deferral_code, one of     |    |              |        |
+|        |   [A], [B] or [C])          |    |              |        |
+|        |                             |    |              |        |
+|        |  [A] interaction_required   |    |              |        |
+|        |--(A1) Send user to URI------|----|------------->|        |
+|        |                             |    |              |        |
+|        |  [B] interaction_pending    |    |              |End-User|
+|        |                             |    |-(B1) Reach-->|        |
+|        |                             |    |  out to user |        |
+|        |                             |    |              |        |
+|        |                             |    |<-(4) Obtain->|        |
+|        |                             |    |   consent    |        |
+|        |                             |    |              |        |
+|        |--(5) Token Request--------->|    |              |        |
+|        |  (deferral_code)            |    |              |        |
+|        |<-interaction_pending--------|    |              |        |
+|        |                             |    |              +--------+
+|        |                             |    |
+|        |  [C] authorization_pending  |    |
+| Client |                             | AS |
+|        |--(5) Token Request--------->|    |
+|        |<-authorization_pending------|    |
+|        |                             |    |---------+
+|        |                             |    |         |
+|        |                             |    | (6) Complete request
+|        |                             |    |         |
+|        |                             |    |<--------+
+|        |                             |    |
+|        |<.(7) Optional Callback......|    |
+|        |                             |    |
+|        |--(5) Token Request--------->|    |
+|        |  (deferral_code)            |    |
+|        |<-(8) Token Response---------|    |
+|        |                             |    |
++--------+                             +----+
 ~~~
+
 
 For a token-endpoint-only grant the flow is the same with steps (1)
 through (3) collapsed into the initial token request.
