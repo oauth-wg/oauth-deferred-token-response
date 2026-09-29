@@ -25,7 +25,7 @@ when one is configured.
 <meta content="deferred authorization" name="keyword">
 <meta content="asynchronous token issuance" name="keyword">
 <meta content="polling" name="keyword">
-<meta content="draft-gerber-oauth-deferred-token-response-latest" name="ietf.draft">
+<meta content="draft-ietf-oauth-deferred-token-response-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.34.1
     Python 3.14.7
@@ -41,7 +41,7 @@ when one is configured.
     requests 2.33.1
     wcwidth 0.8.4
 -->
-<link href="draft-gerber-oauth-deferred-token-response.xml" rel="alternate" type="application/rfc+xml">
+<link href="draft-ietf-oauth-deferred-token-response.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
 <style type="text/css">@font-face {
   font-family: 'Lora';
@@ -1069,7 +1069,7 @@ svg {
 <dt class="label-workgroup">Workgroup:</dt>
 <dd class="workgroup">Web Authorization Protocol</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
-<dd class="internet-draft">draft-gerber-oauth-deferred-token-response-latest</dd>
+<dd class="internet-draft">draft-ietf-oauth-deferred-token-response-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
 <time datetime="2026-09-29" class="published">29 September 2026</time>
@@ -1114,15 +1114,15 @@ when one is configured.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
       </h2>
 <p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
 <p id="section-note.1-2">
-        The latest revision of this draft can be found at <span><a href="https://maxwellgerber.github.io/deferred-token-response/draft-gerber-oauth-deferred-token-response.html">https://maxwellgerber.github.io/deferred-token-response/draft-gerber-oauth-deferred-token-response.html</a></span>.
-        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-gerber-oauth-deferred-token-response/">https://datatracker.ietf.org/doc/draft-gerber-oauth-deferred-token-response/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+        The latest revision of this draft can be found at <span><a href="https://datatracker.ietf.org/doc/draft-ietf-oauth-deferred-token-response/">https://datatracker.ietf.org/doc/draft-ietf-oauth-deferred-token-response/</a></span>.
+        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-ietf-oauth-deferred-token-response/">https://datatracker.ietf.org/doc/draft-ietf-oauth-deferred-token-response/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
 <p id="section-note.1-3">
         Discussion of this document takes place on the
         Web Authorization Protocol Working Group mailing list (<span><a href="mailto:oauth@ietf.org">mailto:oauth@ietf.org</a></span>),
         which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/oauth/">https://mailarchive.ietf.org/arch/browse/oauth/</a></span>.
         Subscribe at <span><a href="https://www.ietf.org/mailman/listinfo/oauth/">https://www.ietf.org/mailman/listinfo/oauth/</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
 <p id="section-note.1-4">Source for this draft and an issue tracker can be found at
-        <span><a href="https://github.com/maxwellgerber/deferred-token-response">https://github.com/maxwellgerber/deferred-token-response</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
+        <span><a href="https://github.com/oauth-wg/deferred-token-response">https://github.com/oauth-wg/deferred-token-response</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1400,6 +1400,15 @@ when one is configured.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15.2.5">
                 <p id="section-toc.1-1.15.2.5.1"><a href="#appendix-A.5" class="auto internal xref">A.5</a>.  <a href="#name-enterprise-identity-governa" class="internal xref">Enterprise Identity Governance Approval</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15.2.6">
+                <p id="section-toc.1-1.15.2.6.1"><a href="#appendix-A.6" class="auto internal xref">A.6</a>.  <a href="#name-ai-agent-with-browser-acces" class="internal xref">AI Agent with Browser Access</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15.2.7">
+                <p id="section-toc.1-1.15.2.7.1"><a href="#appendix-A.7" class="auto internal xref">A.7</a>.  <a href="#name-regulatory-compliance" class="internal xref">Regulatory Compliance</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15.2.8">
+                <p id="section-toc.1-1.15.2.8.1"><a href="#appendix-A.8" class="auto internal xref">A.8</a>.  <a href="#name-interactive-and-explicit-co" class="internal xref">Interactive and Explicit Consent for Sensitive Operations</a></p>
 </li>
             </ul>
 </li>
@@ -3618,6 +3627,86 @@ pending state.<a href="#appendix-A.5-2" class="pilcrow">¶</a></p>
 issuer of access tokens even when the decision logic lives in a
 purpose-built governance system, without requiring the client to
 integrate with the governance system directly.<a href="#appendix-A.5-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="ai-agent-with-browser-access">
+<section id="appendix-A.6">
+        <h3 id="name-ai-agent-with-browser-acces">
+<a href="#appendix-A.6" class="section-number selfRef">A.6. </a><a href="#name-ai-agent-with-browser-acces" class="section-name selfRef">AI Agent with Browser Access</a>
+        </h3>
+<p id="appendix-A.6-1">An AI agent acts on behalf of a user at a third-party service. The
+agent and the service both use the user's identity provider for
+sign-on. The agent first performs Token Exchange (<span>[<a href="#RFC8693" class="cite xref">RFC8693</a>]</span>) with
+the identity provider and receives an identity assertion for the
+user. The agent then presents the assertion in the token request of
+the Identity Assertion JWT Authorization Grant (<span>[<a href="#ID-JAG" class="cite xref">ID-JAG</a>]</span>) at the
+service's authorization server. No user interaction has taken place
+at the service.<a href="#appendix-A.6-1" class="pilcrow">¶</a></p>
+<p id="appendix-A.6-2">The service requires the user's consent for the requested
+operation, and the assertion alone does not provide it. The grants
+that capture human consent today do not fit this request: the
+authorization code grant would require a redirect-based flow at the
+client, and CIBA would be a separate client-initiated request that
+cannot carry the assertion (<a href="#relationship-to-ciba" class="auto internal xref">Section 10.1</a>). The agent
+sends the token request with <code>completion_mode=deferred</code>. The
+authorization server returns a deferred response, and polling
+returns <code>interaction_required</code> with an <code>interaction_uri</code>. The agent
+redirects the user's browser to the <code>interaction_uri</code>, and the user
+consents there. The consent is recorded together with the
+assertion, so the approval is linked to it: this agent, this user,
+this operation. The agent learns of the result by polling with the
+deferral code, or through a callback notification.<a href="#appendix-A.6-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="regulatory-compliance">
+<section id="appendix-A.7">
+        <h3 id="name-regulatory-compliance">
+<a href="#appendix-A.7" class="section-number selfRef">A.7. </a><a href="#name-regulatory-compliance" class="section-name selfRef">Regulatory Compliance</a>
+        </h3>
+<p id="appendix-A.7-1">A user asks their AI assistant to gather the user's sensitive
+records from a third-party service. Privacy regulation requires
+the service to obtain the user's explicit consent before disclosing
+personal data to a third party, and to keep a record of what was
+approved and under which delegation it was requested.<a href="#appendix-A.7-1" class="pilcrow">¶</a></p>
+<p id="appendix-A.7-2">As in the previous use case, the agent and the service both use the
+user's identity provider for sign-on. The agent first obtains an
+identity assertion for the user through Token Exchange
+(<span>[<a href="#RFC8693" class="cite xref">RFC8693</a>]</span>) and presents it in the token request. The assertion
+proves who the agent is and whom it acts for, but it is not the
+consent the regulation requires.<a href="#appendix-A.7-2" class="pilcrow">¶</a></p>
+<p id="appendix-A.7-3">The agent sends the token request with <code>completion_mode=deferred</code>.
+The authorization server returns a deferred response, and polling
+returns <code>interaction_required</code> with an <code>interaction_uri</code>. The user
+consents at that URI. The authorization server records the consent
+together with the assertion, resolves the deferred request, and
+issues the token only after the interaction completes. The consent
+record and the assertion together show which delegation requested
+the access and that the user approved it.<a href="#appendix-A.7-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="interactive-and-explicit-consent-for-sensitive-operations">
+<section id="appendix-A.8">
+        <h3 id="name-interactive-and-explicit-co">
+<a href="#appendix-A.8" class="section-number selfRef">A.8. </a><a href="#name-interactive-and-explicit-co" class="section-name selfRef">Interactive and Explicit Consent for Sensitive Operations</a>
+        </h3>
+<p id="appendix-A.8-1">A user asks their AI agent to pay a large invoice on their behalf.
+The payment service requires the user's explicit consent for
+high-value transactions: before issuing a token, it must show the
+user the amount and the recipient, and record the user's decision.<a href="#appendix-A.8-1" class="pilcrow">¶</a></p>
+<p id="appendix-A.8-2">As in the previous use cases, the agent and the service both use
+the user's identity provider for sign-on. The agent first obtains
+an identity assertion for the user through Token Exchange
+(<span>[<a href="#RFC8693" class="cite xref">RFC8693</a>]</span>) and presents it in the token request. The assertion
+does not cover this specific transaction.<a href="#appendix-A.8-2" class="pilcrow">¶</a></p>
+<p id="appendix-A.8-3">The agent sends the token request with <code>completion_mode=deferred</code>.
+The authorization server returns a deferred response, and polling
+returns <code>interaction_required</code> with an <code>interaction_uri</code>. The agent
+opens the <code>interaction_uri</code> in the browser. The user sees the
+transaction and the delegation under which it was requested, and
+grants or declines consent there. The authorization server resolves
+the deferred request, and the agent retrieves the result by
+polling. If the user declines, polling returns <code>access_denied</code> and
+the agent terminates the task.<a href="#appendix-A.8-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
