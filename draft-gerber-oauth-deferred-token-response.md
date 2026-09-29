@@ -647,7 +647,7 @@ grant_type=authorization_code
 &client_notification_token=5SIVTd4ZzzGctFQr4AqOGdCgyIa40-tCepd-0AcZxFY
 ~~~
 
-### Initial Request Validation {#initial-request-validation}
+### Initial Request Validation
 
 The authorization server MUST validate the request as it would without
 DTR, with the following additions:
@@ -1211,32 +1211,15 @@ RECOMMENDED 160 bits) from a cryptographically secure random source
 and encode them with base64url without padding
 ({{Section 5 of RFC4648}}).
 
-A recurring source of non-compliance is generating these credentials
-with a UUID library. A version 4 UUID is 128 bits wide but carries at
-most 122 bits of randomness, because 6 bits are fixed by the version
-and variant fields ({{Section 5.4 of RFC9562}}), falling below the
-128-bit minimum. Other UUID versions are weaker still for this
-purpose: versions 1 and 6 encode a timestamp and a node identifier,
-and version 7 spends 48 bits on a timestamp. Neither {{RFC9562}} nor the
-typical language runtime guarantees that a UUID's random bits come from
-a cryptographically secure source. Implementations SHOULD NOT use UUIDs
-of any version as deferral codes or `client_notification_token` values.
-
-An authorization server MAY derive the deferral code from server-side
-state rather than issue a random value directly — for example, by
-encrypting a record of the pending request. Such a construction MUST
-remain opaque to the client per
-{{token-endpoint-deferred-response}}, MUST be integrity protected, and
-MUST incorporate at least 128 bits of cryptographically secure
-randomness that an attacker cannot predict from observed values; the
-encoded length of the resulting value is not evidence that this holds.
-
-An authorization server cannot verify the entropy of a
-`client_notification_token`, because the value is opaque to it. Any
-check applied under {{initial-request-validation}} approximates the
-requirement rather than verifying it, and such checks vary from server
-to server. Satisfying the entropy requirement remains the client's
-obligation.
+UUIDs are a recurring source of non-compliance. A version 4 UUID is
+128 bits wide but carries at most 122 bits of randomness, because the
+version and variant fields are fixed ({{Section 5.4 of RFC9562}}), and
+other versions spend further bits on timestamps and node identifiers.
+{{RFC9562}} also does not require those bits to be drawn from a
+cryptographically secure source.
+Meeting the entropy requirement is the responsibility of the party that
+generates the value, and attempts by the receiving party to verify it
+are inherently unreliable.
 
 ## Polling and Callback Together
 
