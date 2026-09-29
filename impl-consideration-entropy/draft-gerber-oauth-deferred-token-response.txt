@@ -5,8 +5,8 @@
 Web Authorization Protocol                     G. de Oliveira Niero, Ed.
 Internet-Draft                                                      Itaú
 Intended status: Standards Track                             D. Liu, Ed.
-Expires: 27 February 2027                                  Alibaba Group
-                                                          26 August 2026
+Expires: 2 April 2027                                      Alibaba Group
+                                                       29 September 2026
 
 
                         Deferred Token Response
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 February 2027.
+   This Internet-Draft will expire on 2 April 2027.
 
 Copyright Notice
 
@@ -1209,32 +1209,15 @@ token=LRGidcSAeVs_xYpEDt5pNx0A0TBr7qPHbh_Se6pfdf4
    source and encode them with base64url without padding (Section 5 of
    [RFC4648]).
 
-   A recurring source of non-compliance is generating these credentials
-   with a UUID library.  A version 4 UUID is 128 bits wide but carries
-   at most 122 bits of randomness, because 6 bits are fixed by the
-   version and variant fields (Section 5.4 of [RFC9562]), falling below
-   the 128-bit minimum.  Other UUID versions are weaker still for this
-   purpose: versions 1 and 6 encode a timestamp and a node identifier,
-   and version 7 spends 48 bits on a timestamp.  Neither [RFC9562] nor
-   the typical language runtime guarantees that a UUID's random bits
-   come from a cryptographically secure source.  Implementations SHOULD
-   NOT use UUIDs of any version as deferral codes or
-   client_notification_token values.
-
-   An authorization server MAY derive the deferral code from server-side
-   state rather than issue a random value directly — for example, by
-   encrypting a record of the pending request.  Such a construction MUST
-   remain opaque to the client per Section 6.4, MUST be integrity
-   protected, and MUST incorporate at least 128 bits of
-   cryptographically secure randomness that an attacker cannot predict
-   from observed values; the encoded length of the resulting value is
-   not evidence that this holds.
-
-   An authorization server cannot verify the entropy of a
-   client_notification_token, because the value is opaque to it.  Any
-   check applied under Section 6.3.1 approximates the requirement rather
-   than verifying it, and such checks vary from server to server.
-   Satisfying the entropy requirement remains the client's obligation.
+   UUIDs are a recurring source of non-compliance.  A version 4 UUID is
+   128 bits wide but carries at most 122 bits of randomness, because the
+   version and variant fields are fixed (Section 5.4 of [RFC9562]), and
+   other versions spend further bits on timestamps and node identifiers.
+   [RFC9562] also does not require those bits to be drawn from a
+   cryptographically secure source.  Meeting the entropy requirement is
+   the responsibility of the party that generates the value, and
+   attempts by the receiving party to verify it are inherently
+   unreliable.
 
 9.2.  Polling and Callback Together
 
@@ -1728,9 +1711,9 @@ token=LRGidcSAeVs_xYpEDt5pNx0A0TBr7qPHbh_Se6pfdf4
    [OAUTH-2.1]
               Hardt, D., Parecki, A., and T. Lodderstedt, "The OAuth 2.1
               Authorization Framework", Work in Progress, Internet-
-              Draft, draft-ietf-oauth-v2-1-15, 2 March 2026,
+              Draft, draft-ietf-oauth-v2-1-16, 2 September 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-
-              v2-1-15>.
+              v2-1-16>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,

@@ -20,26 +20,26 @@ The client retrieves the eventual response by polling the token
 endpoint, or by receiving a callback from the authorization server
 when one is configured. 
     " name="description">
-<meta content="xml2rfc 3.34.0" name="generator">
+<meta content="xml2rfc 3.34.1" name="generator">
 <meta content="oauth" name="keyword">
 <meta content="deferred authorization" name="keyword">
 <meta content="asynchronous token issuance" name="keyword">
 <meta content="polling" name="keyword">
 <meta content="draft-gerber-oauth-deferred-token-response-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.34.0
+  xml2rfc 3.34.1
     Python 3.14.7
-    ConfigArgParse 1.7.5
+    ConfigArgParse 1.7.7
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.1.1
     natsort 8.4.0
-    platformdirs 4.11.3
+    platformdirs 4.11.10
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.8.2
+    wcwidth 0.8.4
 -->
 <link href="draft-gerber-oauth-deferred-token-response.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1055,11 +1055,11 @@ svg {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">DTR</td>
-<td class="right">August 2026</td>
+<td class="right">September 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">de Oliveira Niero &amp; Liu</td>
-<td class="center">Expires 27 February 2027</td>
+<td class="center">Expires 2 April 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1072,12 +1072,12 @@ svg {
 <dd class="internet-draft">draft-gerber-oauth-deferred-token-response-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-08-26" class="published">26 August 2026</time>
+<time datetime="2026-09-29" class="published">29 September 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-02-27">27 February 2027</time></dd>
+<dd class="expires"><time datetime="2027-04-02">2 April 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1143,7 +1143,7 @@ when one is configured.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 27 February 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 2 April 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1995,7 +1995,7 @@ originating grant's normal error response.<a href="#section-6.1.1-3" class="pilc
 response to a preceding-endpoint request, regardless of whether the
 request carried a <code>completion_mode=deferred</code> hint.
 For the Authorization Code Grant of <span>[<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span>, this is the
-authorization code response of <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-15#section-4.1.2" class="relref">Section 4.1.2</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span>.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+authorization code response of <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-16#section-4.1.2" class="relref">Section 4.1.2</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span>.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.2-2">The client processes the response per the originating grant's rules.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2028,7 +2028,7 @@ cannot authenticate inbound callbacks (see <a href="#callback-endpoint-validatio
 <ul class="normal">
 <li class="normal" id="section-6.3-5.1">
             <p id="section-6.3-5.1.1">The originating grant's normal token response per
-<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-15#section-5.1" class="relref">Section 5.1</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span>, if the authorization server completes
+<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-16#section-5.1" class="relref">Section 5.1</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span>, if the authorization server completes
 the request synchronously.<a href="#section-6.3-5.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-6.3-5.2">
@@ -2097,7 +2097,7 @@ originating grant's rules, as appropriate.<a href="#section-6.3.1-3" class="pilc
         </h3>
 <p id="section-6.4-1">When the authorization server elects to defer a token request whose
 <code>completion_mode</code> includes <code>deferred</code>, it returns an error response on
-the token endpoint per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-15#section-5.2" class="relref">Section 5.2</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span> with the HTTP
+the token endpoint per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-16#section-5.2" class="relref">Section 5.2</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span> with the HTTP
 status code 400 (Bad Request) and the error code <code>authorization_pending</code>.
 The deferred response is not a token response: it issues no access
 token and confers no access to any protected resource. Instead it
@@ -2153,7 +2153,7 @@ deferral code.<a href="#section-6.4-4.6.1" class="pilcrow">¶</a></p>
 <dt id="section-6.4-4.7"><code>error_description</code></dt>
           <dd style="margin-left: 1.5em" id="section-6.4-4.8">
             <p id="section-6.4-4.8.1"><span class="bcp14">OPTIONAL</span>. Human-readable text as defined in
-<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-15#section-5.2" class="relref">Section 5.2</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span>, subject to the data-minimization rules
+<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-16#section-5.2" class="relref">Section 5.2</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span>, subject to the data-minimization rules
 of <a href="#progress-information-in-errors" class="auto internal xref">Section 9.4</a>.<a href="#section-6.4-4.8.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
@@ -2252,7 +2252,7 @@ parameters using the <code>application/x-www-form-urlencoded</code> format:<a hr
         <dd class="break"></dd>
 </dl>
 <p id="section-6.5-5">The client authenticates to the token endpoint as required by its
-registered authentication method per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-15#section-2.4" class="relref">Section 2.4</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span>.<a href="#section-6.5-5" class="pilcrow">¶</a></p>
+registered authentication method per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-16#section-2.4" class="relref">Section 2.4</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span>.<a href="#section-6.5-5" class="pilcrow">¶</a></p>
 <p id="section-6.5-6">The client <span class="bcp14">MUST NOT</span> send polling requests faster than the rate
 established by the <code>interval</code> parameter of the deferred response. The
 client <span class="bcp14">MUST</span> increase the interval in response to a <code>slow_down</code> error
@@ -2277,7 +2277,7 @@ grant_type=urn:ietf:params:oauth:grant-type:deferred
 <p id="section-6.5.1-1">The authorization server <span class="bcp14">MUST</span> validate the request:<a href="#section-6.5.1-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-6.5.1-2">
 <li id="section-6.5.1-2.1">
-              <p id="section-6.5.1-2.1.1">Authenticate the client per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-15#section-2.4" class="relref">Section 2.4</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span>.<a href="#section-6.5.1-2.1.1" class="pilcrow">¶</a></p>
+              <p id="section-6.5.1-2.1.1">Authenticate the client per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-16#section-2.4" class="relref">Section 2.4</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span>.<a href="#section-6.5.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
             <li id="section-6.5.1-2.2">
               <p id="section-6.5.1-2.2.1">Verify that the <code>deferral_code</code> is recognized and was issued to
@@ -2316,7 +2316,7 @@ error response per <a href="#token-endpoint-error-responses" class="auto interna
           </h4>
 <p id="section-6.5.2-1">When the deferred request has resolved successfully, the authorization
 server returns the originating grant's successful token response per
-<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-15#section-5.1" class="relref">Section 5.1</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span>.
+<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-16#section-5.1" class="relref">Section 5.1</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span>.
 The response includes an <code>access_token</code>, a <code>token_type</code>, and any other
 fields the originating grant defines (such as <code>refresh_token</code> or
 <code>scope</code>).<a href="#section-6.5.2-1" class="pilcrow">¶</a></p>
@@ -2327,7 +2327,7 @@ that originating-grant <code>issued_token_type</code> value. The successful poll
 response is never a deferred response and <span class="bcp14">MUST NOT</span> carry the
 <code>urn:ietf:params:oauth:token-type:deferral-code</code> type.<a href="#section-6.5.2-2" class="pilcrow">¶</a></p>
 <p id="section-6.5.2-3">The <code>expires_in</code> field of this response carries the access-token
-lifetime per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-15#section-5.1" class="relref">Section 5.1</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span>; it is not the
+lifetime per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-16#section-5.1" class="relref">Section 5.1</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span>; it is not the
 deferral-code lifetime conveyed by <code>expires_in</code> in the earlier
 deferred response.<a href="#section-6.5.2-3" class="pilcrow">¶</a></p>
 <p id="section-6.5.2-4">A <code>deferral_code</code> that has been redeemed for a successful response is
@@ -2361,7 +2361,7 @@ Cache-Control: no-store
 request of <a href="#token-endpoint-initial-request" class="auto internal xref">Section 6.3</a> or the polling request of
 <a href="#token-endpoint-polling" class="auto internal xref">Section 6.5</a> — is invalid, unauthorized, or pending, the
 authorization server returns an error response per
-<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-15#section-5.2" class="relref">Section 5.2</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span>.<a href="#section-6.6-1" class="pilcrow">¶</a></p>
+<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-16#section-5.2" class="relref">Section 5.2</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span>.<a href="#section-6.6-1" class="pilcrow">¶</a></p>
 <p id="section-6.6-2">The authorization server <span class="bcp14">MUST</span> include the <code>Cache-Control: no-store</code>
 header field from <span><a href="https://rfc-editor.org/rfc/rfc7234#section-5.2.2.3" class="relref">Section 5.2.2.3</a> of [<a href="#RFC7234" class="cite xref">RFC7234</a>]</span> in every error response
 defined in this section, including the deferred response of
@@ -2369,7 +2369,7 @@ defined in this section, including the deferred response of
 <code>slow_down</code> response. This prevents an intermediary or the client from
 caching a transient <code>authorization_pending</code> response and replaying it,
 which could otherwise cause the client to poll indefinitely.<a href="#section-6.6-2" class="pilcrow">¶</a></p>
-<p id="section-6.6-3">In addition to the error codes defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-15#section-5.2" class="relref">Section 5.2</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span>,
+<p id="section-6.6-3">In addition to the error codes defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-16#section-5.2" class="relref">Section 5.2</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span>,
 this specification uses the following error codes, with semantics
 aligned with the corresponding codes in <span><a href="https://rfc-editor.org/rfc/rfc8628#section-3.5" class="relref">Section 3.5</a> of [<a href="#RFC8628" class="cite xref">RFC8628</a>]</span>:<a href="#section-6.6-3" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-6.6-4">
@@ -2431,7 +2431,7 @@ cancelled per <a href="#cancellation" class="auto internal xref">Section 8</a>.<
 <li class="normal" id="section-6.6-6.1">
             <p id="section-6.6-6.1.1">A <code>deferral_code</code> that is not recognized, was issued to a
 different client, or has already been redeemed <span class="bcp14">MUST</span> result in an
-<code>invalid_grant</code> error per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-15#section-3.2.4" class="relref">Section 3.2.4</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span>. When the
+<code>invalid_grant</code> error per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-16#section-3.2.4" class="relref">Section 3.2.4</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span>. When the
 server has confirmed that the deferral code was issued to the authenticated
 client, the <code>error_description</code> <span class="bcp14">SHOULD</span> distinguish between "already
 redeemed" and "unknown identifier" for diagnostic purposes. When the
@@ -2606,7 +2606,7 @@ the authorization server's revocation endpoint per <span>[<a href="#RFC7009" cla
         <dd class="break"></dd>
 </dl>
 <p id="section-8.1-3">The client authenticates to the revocation endpoint as required by its
-registered authentication method per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-15#section-2.4" class="relref">Section 2.4</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span>.<a href="#section-8.1-3" class="pilcrow">¶</a></p>
+registered authentication method per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-16#section-2.4" class="relref">Section 2.4</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span>.<a href="#section-8.1-3" class="pilcrow">¶</a></p>
 <p id="section-8.1-4">The following is a non-normative example:<a href="#section-8.1-4" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-8.1-5">
 <pre>
@@ -2730,30 +2730,15 @@ A conforming construction is to draw 16 octets (20 octets to meet the
 <span class="bcp14">RECOMMENDED</span> 160 bits) from a cryptographically secure random source
 and encode them with base64url without padding
 (<span><a href="https://rfc-editor.org/rfc/rfc4648#section-5" class="relref">Section 5</a> of [<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>).<a href="#section-9.1-1" class="pilcrow">¶</a></p>
-<p id="section-9.1-2">A recurring source of non-compliance is generating these credentials
-with a UUID library. A version 4 UUID is 128 bits wide but carries at
-most 122 bits of randomness, because 6 bits are fixed by the version
-and variant fields (<span><a href="https://rfc-editor.org/rfc/rfc9562#section-5.4" class="relref">Section 5.4</a> of [<a href="#RFC9562" class="cite xref">RFC9562</a>]</span>), falling below the
-128-bit minimum. Other UUID versions are weaker still for this
-purpose: versions 1 and 6 encode a timestamp and a node identifier,
-and version 7 spends 48 bits on a timestamp. Neither <span>[<a href="#RFC9562" class="cite xref">RFC9562</a>]</span> nor the
-typical language runtime guarantees that a UUID's random bits come from
-a cryptographically secure source. Implementations <span class="bcp14">SHOULD NOT</span> use UUIDs
-of any version as deferral codes or <code>client_notification_token</code> values.<a href="#section-9.1-2" class="pilcrow">¶</a></p>
-<p id="section-9.1-3">An authorization server <span class="bcp14">MAY</span> derive the deferral code from server-side
-state rather than issue a random value directly — for example, by
-encrypting a record of the pending request. Such a construction <span class="bcp14">MUST</span>
-remain opaque to the client per
-<a href="#token-endpoint-deferred-response" class="auto internal xref">Section 6.4</a>, <span class="bcp14">MUST</span> be integrity protected, and
-<span class="bcp14">MUST</span> incorporate at least 128 bits of cryptographically secure
-randomness that an attacker cannot predict from observed values; the
-encoded length of the resulting value is not evidence that this holds.<a href="#section-9.1-3" class="pilcrow">¶</a></p>
-<p id="section-9.1-4">An authorization server cannot verify the entropy of a
-<code>client_notification_token</code>, because the value is opaque to it. Any
-check applied under <a href="#initial-request-validation" class="auto internal xref">Section 6.3.1</a> approximates the
-requirement rather than verifying it, and such checks vary from server
-to server. Satisfying the entropy requirement remains the client's
-obligation.<a href="#section-9.1-4" class="pilcrow">¶</a></p>
+<p id="section-9.1-2">UUIDs are a recurring source of non-compliance. A version 4 UUID is
+128 bits wide but carries at most 122 bits of randomness, because the
+version and variant fields are fixed (<span><a href="https://rfc-editor.org/rfc/rfc9562#section-5.4" class="relref">Section 5.4</a> of [<a href="#RFC9562" class="cite xref">RFC9562</a>]</span>), and
+other versions spend further bits on timestamps and node identifiers.
+<span>[<a href="#RFC9562" class="cite xref">RFC9562</a>]</span> also does not require those bits to be drawn from a
+cryptographically secure source.
+Meeting the entropy requirement is the responsibility of the party that
+generates the value, and attempts by the receiving party to verify it
+are inherently unreliable.<a href="#section-9.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="polling-and-callback-together">
@@ -2889,7 +2874,7 @@ to choose the user or system to contact dynamically.<a href="#section-10.1-3" cl
 <a href="#section-11" class="section-number selfRef">11. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
 <p id="section-11-1">This specification builds on the security model of OAuth 2.1
-(<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-15#section-7" class="relref">Section 7</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span>) and the OAuth Security Best Current
+(<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-16#section-7" class="relref">Section 7</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span>) and the OAuth Security Best Current
 Practice (<span>[<a href="#RFC9700" class="cite xref">RFC9700</a>]</span>). The considerations in those documents apply.
 The following considerations are specific to this specification.<a href="#section-11-1" class="pilcrow">¶</a></p>
 <div id="sender-constraint-requirements">
@@ -2908,7 +2893,7 @@ which has no client credentials to compromise, sender-constraining is
 the primary defense against a stolen deferral code rather than an
 additional layer, which is why the binding below is mandatory for such
 clients.<a href="#section-11.1-1" class="pilcrow">¶</a></p>
-<p id="section-11.1-2">A client that is a public client per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-15#section-2.1" class="relref">Section 2.1</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span>, or
+<p id="section-11.1-2">A client that is a public client per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-16#section-2.1" class="relref">Section 2.1</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span>, or
 that is using an originating grant whose security profile mandates
 DPoP (for example, a profile that adopts <span>[<a href="#RFC9449" class="cite xref">RFC9449</a>]</span> as a
 requirement), <span class="bcp14">MUST</span> present a DPoP proof on the initial token request
@@ -2954,7 +2939,7 @@ protection.<a href="#section-11.2-1" class="pilcrow">¶</a></p>
 <p id="section-11.2-2">The originating grant's credentials — for example, the authorization
 <code>code</code> returned to a client that requested <code>response_type=code</code> — are
 unaffected by DTR and remain subject to the same protections as in
-the non-deferred case (<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-15#section-4.1.3" class="relref">Section 4.1.3</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span>,
+the non-deferred case (<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-16#section-4.1.3" class="relref">Section 4.1.3</a> of [<a href="#OAUTH-2.1" class="cite xref">OAUTH-2.1</a>]</span>,
 <span><a href="https://rfc-editor.org/rfc/rfc9700#section-2.1.1" class="relref">Section 2.1.1</a> of [<a href="#RFC9700" class="cite xref">RFC9700</a>]</span>).<a href="#section-11.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -3403,7 +3388,7 @@ IETF for token endpoint response usage defined by this specification<a href="#se
 <dl class="references">
 <dt id="OAUTH-2.1">[OAUTH-2.1]</dt>
         <dd>
-<span class="refAuthor">Hardt, D.</span>, <span class="refAuthor">Parecki, A.</span>, and <span class="refAuthor">T. Lodderstedt</span>, <span class="refTitle">"The OAuth 2.1 Authorization Framework"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-oauth-v2-1-15</span>, <time datetime="2026-03-02" class="refDate">2 March 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-15">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-15</a>&gt;</span>. </dd>
+<span class="refAuthor">Hardt, D.</span>, <span class="refAuthor">Parecki, A.</span>, and <span class="refAuthor">T. Lodderstedt</span>, <span class="refTitle">"The OAuth 2.1 Authorization Framework"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-oauth-v2-1-16</span>, <time datetime="2026-09-02" class="refDate">2 September 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-16">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-16</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
