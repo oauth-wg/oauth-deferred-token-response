@@ -663,9 +663,6 @@ DTR, with the following additions:
   does not also include `deferred` in `completion_mode`, the
   authorization server MUST reject the request with the error
   `invalid_request`.
-- If `client_notification_token` is present, verify that the value
-  conforms to the entropy requirements above. If not, the
-  authorization server MAY reject the request with `invalid_request`.
 
 If the authorization server encounters any error, it MUST return an
 error response per {{token-endpoint-error-responses}} or per the
