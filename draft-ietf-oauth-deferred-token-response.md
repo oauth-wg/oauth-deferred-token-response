@@ -213,8 +213,8 @@ endpoints. A grant becomes deferred when:
    including one of the supported values of the `completion_mode`
    parameter on the originating grant's token endpoint request.
 2. The authorization server elects, on that token endpoint request,
-   to require interaction, inform a pending interaction by the 
-   end-user or return a deferred response in place of the normal 
+   to require interaction, inform a pending interaction by the
+   end-user or return a deferred response in place of the normal
    token response. The deferred response carries a `deferral_code`
    instead of an access token.
 3. The client polls the token endpoint with the `deferral_code`
