@@ -252,22 +252,22 @@ deferred.
 |        |   [A], [B] or [C])          |    |              |        |
 |        |                             |    |              |        |
 |        |  [A] interaction_required   |    |              |        |
-|        |--(A1) Send user to URI------|----|------------->|        |
+|        |--(A1) Send user to URI------|----|------------->|End-User|
 |        |                             |    |              |        |
-|        |  [B] interaction_pending    |    |              |End-User|
+|        |  [B] interaction_pending    |    |              |        |
 |        |                             |    |-(B1) Reach-->|        |
 |        |                             |    |  out to user |        |
 |        |                             |    |              |        |
 |        |                             |    |<-(4) Obtain->|        |
 |        |                             |    |   consent    |        |
 |        |                             |    |              |        |
-|        |--(5) Token Request--------->|    |              |        |
+| Client |--(5) Token Request--------->| AS |              |        |
 |        |  (deferral_code)            |    |              |        |
 |        |<-interaction_pending--------|    |              |        |
 |        |                             |    |              +--------+
 |        |                             |    |
 |        |  [C] authorization_pending  |    |
-| Client |                             | AS |
+|        |                             |    |
 |        |--(5) Token Request--------->|    |
 |        |<-authorization_pending------|    |
 |        |                             |    |---------+
