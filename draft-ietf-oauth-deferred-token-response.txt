@@ -5,8 +5,8 @@
 Web Authorization Protocol                     G. de Oliveira Niero, Ed.
 Internet-Draft                                                      Itaú
 Intended status: Standards Track                             D. Liu, Ed.
-Expires: 22 March 2027                                     Alibaba Group
-                                                       18 September 2026
+Expires: 3 April 2027                                      Alibaba Group
+                                                       30 September 2026
 
 
                         Deferred Token Response
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 March 2027.
+   This Internet-Draft will expire on 3 April 2027.
 
 Copyright Notice
 
@@ -106,10 +106,11 @@ Table of Contents
      8.3.  Idempotency and Retry
      8.4.  Discovery
    9.  Implementation Considerations
-     9.1.  Polling and Callback Together
-     9.2.  Obtaining an Immediate Result Alongside a Deferred Request
-     9.3.  Progress Information in Errors
-     9.4.  Delegation to External Services
+     9.1.  Generating Deferral Codes and Notification Tokens
+     9.2.  Polling and Callback Together
+     9.3.  Obtaining an Immediate Result Alongside a Deferred Request
+     9.4.  Progress Information in Errors
+     9.5.  Delegation to External Services
    10. Relationship to Other Specifications
      10.1.  Relationship to CIBA
    11. Security Considerations
@@ -641,10 +642,10 @@ Table of Contents
       a Bearer token on any callback notification for that deferral code
       (see Section 7.1).  The token MUST contain sufficient entropy to
       make brute-force guessing infeasible (a minimum of 128 bits, with
-      160 bits RECOMMENDED).  A client that registers a
-      deferred_client_notification_endpoint SHOULD include a
-      client_notification_token; without one, the client cannot
-      authenticate inbound callbacks (see Section 11.4).
+      160 bits RECOMMENDED), following Section 9.1 guidelines.  A client
+      that registers a deferred_client_notification_endpoint SHOULD
+      include a client_notification_token; without one, the client
+      cannot authenticate inbound callbacks (see Section 11.4).
 
    The response to this request is one of:
 
@@ -687,10 +688,6 @@ Table of Contents
       not also include deferred in completion_mode, the authorization
       server MUST reject the request with the error invalid_request.
 
-   *  If client_notification_token is present, verify that the value
-      conforms to the entropy requirements above.  If not, the
-      authorization server MAY reject the request with invalid_request.
-
    If the authorization server encounters any error, it MUST return an
    error response per Section 6.6 or per the originating grant's rules,
    as appropriate.
@@ -721,10 +718,11 @@ Table of Contents
       authorization server.  The deferral code MUST contain at least 128
       bits of entropy (160 bits RECOMMENDED) drawn from a
       cryptographically secure random source per Section 10.10 of
-      [RFC6749].  The deferral code MUST be opaque to the client and
-      MUST NOT carry meaning visible to the client.  The client uses
-      this value when polling the token endpoint per Section 6.5 and, if
-      a deferred_client_notification_endpoint is registered, the
+      [RFC6749].  See Section 9.1 for construction guidance.  The
+      deferral code MUST be opaque to the client and MUST NOT carry
+      meaning visible to the client.  The client uses this value when
+      polling the token endpoint per Section 6.5 and, if a
+      deferred_client_notification_endpoint is registered, the
       authorization server includes the same value when it notifies the
       client.
 
@@ -745,7 +743,7 @@ Table of Contents
 
    error_description  OPTIONAL.  Human-readable text as defined in
       Section 5.2 of [OAUTH-2.1], subject to the data-minimization rules
-      of Section 9.3.
+      of Section 9.4.
 
    interaction_uri  OPTIONAL on initial deferred responses and on
       polling responses carrying authorization_pending.  REQUIRED on
@@ -992,7 +990,7 @@ Table of Contents
       invalid_request.  A client receiving invalid_request MUST NOT make
       further requests with the same deferral_code.
 
-   The data-minimization rules of Section 9.3 apply to the
+   The data-minimization rules of Section 9.4 apply to the
    error_description field of any error response defined in this
    section, including authorization_pending responses that carry
    progress information.
@@ -1199,7 +1197,28 @@ token=LRGidcSAeVs_xYpEDt5pNx0A0TBr7qPHbh_Se6pfdf4
 
 9.  Implementation Considerations
 
-9.1.  Polling and Callback Together
+9.1.  Generating Deferral Codes and Notification Tokens
+
+   The entropy requirements in Section 6.4 and Section 6.3 constrain how
+   unpredictable the value is, not the length in its encoded form.  An
+   implementation satisfies them by drawing the required number of bits
+   from a cryptographically secure random source and encoding the
+   result.  A conforming construction is to draw 16 octets (20 octets to
+   meet the RECOMMENDED 160 bits) from a cryptographically secure random
+   source and encode them with base64url without padding (Section 5 of
+   [RFC4648]).
+
+   UUIDs are a recurring source of non-compliance.  A version 4 UUID is
+   128 bits wide but carries at most 122 bits of randomness, because the
+   version and variant fields are fixed (Section 5.4 of [RFC9562]), and
+   other versions spend further bits on timestamps and node identifiers.
+   [RFC9562] also does not require those bits to be drawn from a
+   cryptographically secure source.  Meeting the entropy requirement is
+   the responsibility of the party that generates the value, and
+   attempts by the receiving party to verify it are inherently
+   unreliable.
+
+9.2.  Polling and Callback Together
 
    A client that has registered a deferred_client_notification_endpoint
    SHOULD continue to poll the token endpoint at the rate established by
@@ -1218,7 +1237,7 @@ token=LRGidcSAeVs_xYpEDt5pNx0A0TBr7qPHbh_Se6pfdf4
    warrant the durability of polling: a single lost push request would
    otherwise lose the outcome of the entire deferred request.
 
-9.2.  Obtaining an Immediate Result Alongside a Deferred Request
+9.3.  Obtaining an Immediate Result Alongside a Deferred Request
 
    A deferred request may take an arbitrarily long time to resolve.  A
    client that also requires an immediate result — for example, a basic
@@ -1246,7 +1265,7 @@ token=LRGidcSAeVs_xYpEDt5pNx0A0TBr7qPHbh_Se6pfdf4
    proceed with available work immediately rather than blocking on the
    deferred outcome.
 
-9.3.  Progress Information in Errors
+9.4.  Progress Information in Errors
 
    When responding to a polling request with authorization_pending, the
    authorization server SHOULD include progress information in the
@@ -1265,7 +1284,7 @@ token=LRGidcSAeVs_xYpEDt5pNx0A0TBr7qPHbh_Se6pfdf4
    appropriate.  Progress information is informational and the client
    MUST NOT depend on its presence or format.
 
-9.4.  Delegation to External Services
+9.5.  Delegation to External Services
 
    An authorization server may rely on one or more external services to
    resolve a deferred request — for example, an identity verification
@@ -1784,9 +1803,17 @@ token=LRGidcSAeVs_xYpEDt5pNx0A0TBr7qPHbh_Se6pfdf4
               "OpenID Connect Core 1.0", n.d.,
               <https://openid.net/specs/openid-connect-core-1_0.html>.
 
+   [RFC4648]  Josefsson, S., "The Base16, Base32, and Base64 Data
+              Encodings", RFC 4648, DOI 10.17487/RFC4648, October 2006,
+              <https://www.rfc-editor.org/rfc/rfc4648>.
+
    [RFC6749]  Hardt, D., Ed., "The OAuth 2.0 Authorization Framework",
               RFC 6749, DOI 10.17487/RFC6749, October 2012,
               <https://www.rfc-editor.org/rfc/rfc6749>.
+
+   [RFC9562]  Davis, K., Peabody, B., and P. Leach, "Universally Unique
+              IDentifiers (UUIDs)", RFC 9562, DOI 10.17487/RFC9562, May
+              2024, <https://www.rfc-editor.org/rfc/rfc9562>.
 
 Appendix A.  Use Cases
 
