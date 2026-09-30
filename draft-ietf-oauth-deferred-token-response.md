@@ -57,7 +57,9 @@ normative:
   OAUTH-2.1: I-D.draft-ietf-oauth-v2-1
 
 informative:
+  RFC4648:
   RFC6749:
+  RFC9562:
   ID-JAG: I-D.draft-ietf-oauth-identity-assertion-authz-grant
   FIPA: I-D.draft-ietf-oauth-first-party-apps
   OIDC-CORE:
@@ -614,10 +616,10 @@ The client MAY also include the following parameter:
   notification for that deferral code (see {{the-callback-request}}).
   The token MUST contain sufficient entropy to make brute-force
   guessing infeasible (a minimum of 128 bits, with 160 bits
-  RECOMMENDED). A client that registers a
-  `deferred_client_notification_endpoint` SHOULD include a
-  `client_notification_token`; without one, the client cannot
-  authenticate inbound callbacks (see {{callback-endpoint-validation}}).
+  RECOMMENDED), following {{credential-generation}} guidelines.
+  A client that registers a `deferred_client_notification_endpoint`
+  SHOULD include a `client_notification_token`; without one, the client
+  cannot authenticate inbound callbacks (see {{callback-endpoint-validation}}).
 
 The response to this request is one of:
 
@@ -661,9 +663,6 @@ DTR, with the following additions:
   does not also include `deferred` in `completion_mode`, the
   authorization server MUST reject the request with the error
   `invalid_request`.
-- If `client_notification_token` is present, verify that the value
-  conforms to the entropy requirements above. If not, the
-  authorization server MAY reject the request with `invalid_request`.
 
 If the authorization server encounters any error, it MUST return an
 error response per {{token-endpoint-error-responses}} or per the
@@ -695,7 +694,8 @@ the following parameters:
 : REQUIRED. The deferral code issued by the authorization server.
 The deferral code MUST contain at least 128 bits of entropy
 (160 bits RECOMMENDED) drawn from a cryptographically secure
-random source per {{Section 10.10 of RFC6749}}. The deferral
+random source per {{Section 10.10 of RFC6749}}. See
+{{credential-generation}} for construction guidance. The deferral
 code MUST be opaque to the client and MUST NOT carry meaning
 visible to the client.
 The client uses this value when polling the token endpoint per
@@ -1195,6 +1195,28 @@ successful cancellation. Clients that skip this check risk silently
 failing to cancel a pending deferred request.
 
 # Implementation Considerations
+
+## Generating Deferral Codes and Notification Tokens {#credential-generation}
+
+The entropy requirements in {{token-endpoint-deferred-response}} and
+{{token-endpoint-initial-request}} constrain how unpredictable the
+value is, not the length in its encoded form. An implementation
+satisfies them by drawing the required number of bits from a
+cryptographically secure random source and encoding the result.
+A conforming construction is to draw 16 octets (20 octets to meet the
+RECOMMENDED 160 bits) from a cryptographically secure random source
+and encode them with base64url without padding
+({{Section 5 of RFC4648}}).
+
+UUIDs are a recurring source of non-compliance. A version 4 UUID is
+128 bits wide but carries at most 122 bits of randomness, because the
+version and variant fields are fixed ({{Section 5.4 of RFC9562}}), and
+other versions spend further bits on timestamps and node identifiers.
+{{RFC9562}} also does not require those bits to be drawn from a
+cryptographically secure source.
+Meeting the entropy requirement is the responsibility of the party that
+generates the value, and attempts by the receiving party to verify it
+are inherently unreliable.
 
 ## Polling and Callback Together
 
