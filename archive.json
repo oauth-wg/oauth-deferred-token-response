@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-09-22T00:09:42.697816+00:00",
+  "timestamp": "2026-10-01T00:12:05.286477+00:00",
   "repo": "oauth-wg/oauth-deferred-token-response",
   "labels": [
     {
@@ -1252,15 +1252,15 @@
       "id": "I_kwDOSeoW_M8AAAABMHDizA",
       "title": "Add use cases and example usage for interaction mode",
       "url": "https://github.com/oauth-wg/oauth-deferred-token-response/issues/63",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "maxpassion",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Add use cases and example usage covering the [JAG-IR scenarios](https://datatracker.ietf.org/doc/html/draft-parecki-oauth-jwt-grant-interaction-response-00#name-use-cases)",
       "createdAt": "2026-08-10T07:23:08Z",
-      "updatedAt": "2026-08-26T09:52:24Z",
-      "closedAt": null,
+      "updatedAt": "2026-09-29T20:24:51Z",
+      "closedAt": "2026-09-29T20:24:51Z",
       "comments": [
         {
           "author": "maxpassion",
@@ -1268,6 +1268,13 @@
           "body": "I've opened #69 to resolve this issue.",
           "createdAt": "2026-08-26T09:52:24Z",
           "updatedAt": "2026-08-26T09:52:24Z"
+        },
+        {
+          "author": "gniero",
+          "authorAssociation": "COLLABORATOR",
+          "body": "PR #69 is already merged, so I assume it is safe to close this issue now",
+          "createdAt": "2026-09-29T20:24:51Z",
+          "updatedAt": "2026-09-29T20:24:51Z"
         }
       ]
     },
@@ -1279,11 +1286,13 @@
       "state": "OPEN",
       "author": "maxpassion",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "gniero"
+      ],
       "labels": [],
       "body": "The current DTR draft does not include a workflow diagram showing how deferred response and `interaction_required` fit together.\n\nAdd a workflow diagram showing the complete DTR + interaction flow.",
       "createdAt": "2026-08-10T07:28:54Z",
-      "updatedAt": "2026-08-10T07:28:54Z",
+      "updatedAt": "2026-09-29T14:11:57Z",
       "closedAt": null,
       "comments": []
     }
@@ -3080,24 +3089,26 @@
       "id": "PR_kwDOSeoW_M8AAAABBG5QeQ",
       "title": "Adds Implementation Consideration on 128-bit entropy",
       "url": "https://github.com/oauth-wg/oauth-deferred-token-response/pull/70",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "gniero",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "## Problem\r\n\r\nWe addressed the examples of deferral codes and client notification tokens in #65, and raised the discussion whether we should include an implementation/security consideration regarding UUIDs not meeting 128-bit randomness requirement.\r\n\r\n## Changes\r\n\r\n- Adds an Implementation Consideration clarifying that 128 bits of length is not the same of 128 bits of randomness - length can be achieved by encoding, which doesn't mean that our requirement is correctly addressed. It also explains that client notification token entropy is the client's responsibility, and attempts to validate entropy on the AS's side may lead to inconsistent / imprecise checks as the AS won't know what is the client's approach to generate them. UUIDs are explicitly mentioned since they're historically present in related specs with similar requirements.\r\n- Adds references of the Implementation Consideration to the sections where the affected parameters are introduced\r\n\r\nThis being an issue originally raised by @mcguinness, I'd appreciate a review on this",
       "createdAt": "2026-08-26T17:26:24Z",
-      "updatedAt": "2026-09-16T14:43:59Z",
+      "updatedAt": "2026-09-30T17:07:42Z",
       "baseRepository": "oauth-wg/oauth-deferred-token-response",
       "baseRefName": "main",
-      "baseRefOid": "ba931fadf63d07af5f9f5be76e6fb583be30e3a1",
+      "baseRefOid": "173bdf074b8d016503119c6e0e963370ce302acb",
       "headRepository": "oauth-wg/oauth-deferred-token-response",
       "headRefName": "impl-consideration-entropy",
-      "headRefOid": "0c456e8ac16104a4eb9b88e74b5c5c7591090ecb",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "07c156a866c7ea53e71af904d1cab06bf187f0ef",
+      "closedAt": "2026-09-30T17:07:41Z",
+      "mergedAt": "2026-09-30T17:07:41Z",
+      "mergedBy": "gniero",
+      "mergeCommit": {
+        "oid": "400158455843b11d13336dda3c8a4303c41e1f08"
+      },
       "comments": [
         {
           "author": "maxwellgerber",
@@ -3105,6 +3116,20 @@
           "body": "I agree we don't need all the details, but I think that a note that UUID explicitly does not satisfy the entropy requirements (and should not be used) would be appropriate. See https://github.com/keycloak/keycloak/issues/38663 as an example of UUID being used in ways that interfere with other standards.",
           "createdAt": "2026-09-16T14:42:47Z",
           "updatedAt": "2026-09-16T14:42:47Z"
+        },
+        {
+          "author": "gniero",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I removed normative words in this non-normative section, since they're already expressed where the attributes that demand them are introduced:`deferral_code` in [token response](https://github.com/oauth-wg/oauth-deferred-token-response/blob/173bdf074b8d016503119c6e0e963370ce302acb/draft-ietf-oauth-deferred-token-response.md?plain=1#L694) and `client_notification_token` in [token endpoint](https://github.com/oauth-wg/oauth-deferred-token-response/blob/173bdf074b8d016503119c6e0e963370ce302acb/draft-ietf-oauth-deferred-token-response.md?plain=1#L610). \r\n\r\nWe still have this:\r\nhttps://github.com/oauth-wg/oauth-deferred-token-response/blob/173bdf074b8d016503119c6e0e963370ce302acb/draft-ietf-oauth-deferred-token-response.md?plain=1#L664-L666\r\n\r\nIt's not feasible for the AS to validate entropy of a received client_notification_token, so I think it should be removed",
+          "createdAt": "2026-09-29T13:20:09Z",
+          "updatedAt": "2026-09-29T13:21:52Z"
+        },
+        {
+          "author": "fkj",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> We still have this:\r\n> \r\n> https://github.com/oauth-wg/oauth-deferred-token-response/blob/173bdf074b8d016503119c6e0e963370ce302acb/draft-ietf-oauth-deferred-token-response.md?plain=1#L664-L666\r\n> \r\n> It's not feasible for the AS to validate entropy of a received client_notification_token, so I think it should be removed\r\n\r\nI agree.",
+          "createdAt": "2026-09-29T13:24:50Z",
+          "updatedAt": "2026-09-29T13:24:50Z"
         }
       ],
       "reviews": [
@@ -3140,6 +3165,39 @@
               "updatedAt": "2026-09-16T14:43:59Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOSeoW_M8AAAABPw-3nQ",
+          "commit": {
+            "abbreviatedOid": "0c456e8"
+          },
+          "author": "gniero",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-29T13:02:25Z",
+          "updatedAt": "2026-09-29T13:02:25Z",
+          "comments": [
+            {
+              "originalPosition": 71,
+              "body": "I will rewrite them in a more concise form, and cut some of the UUID specifics",
+              "createdAt": "2026-09-29T13:02:25Z",
+              "updatedAt": "2026-09-29T13:02:25Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOSeoW_M8AAAABP_XnOA",
+          "commit": {
+            "abbreviatedOid": "07c156a"
+          },
+          "author": "fkj",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM. We can always revisit the implementation considerations with the OAuth WG.",
+          "createdAt": "2026-09-30T15:00:01Z",
+          "updatedAt": "2026-09-30T15:00:01Z",
+          "comments": []
         }
       ]
     },
@@ -3303,6 +3361,66 @@
           "body": "",
           "createdAt": "2026-09-21T13:40:59Z",
           "updatedAt": "2026-09-21T13:40:59Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 74,
+      "id": "PR_kwDOSeoW_M8AAAABFweDeQ",
+      "title": "Updates Overview section to include interaction states",
+      "url": "https://github.com/oauth-wg/oauth-deferred-token-response/pull/74",
+      "state": "OPEN",
+      "author": "gniero",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "# Problem\r\nThe current diagram doesn't show all the possible completion mode states\r\n\r\n# Changes\r\n\r\n- Diagram \r\n  - Changes `Auth request` for `Pre-token request` to match the document section we already have\r\n  - Adds [A], [B] and [C] states for the deferral response\r\n - Overview\r\n   - Updates the description that only mentioned `deferred` as the `completion_mode`, leaving it open to any supported value\r\n\r\nCloses #64",
+      "createdAt": "2026-09-29T19:01:09Z",
+      "updatedAt": "2026-09-30T09:07:50Z",
+      "baseRepository": "oauth-wg/oauth-deferred-token-response",
+      "baseRefName": "main",
+      "baseRefOid": "173bdf074b8d016503119c6e0e963370ce302acb",
+      "headRepository": "oauth-wg/oauth-deferred-token-response",
+      "headRefName": "workflow-illustration-update",
+      "headRefOid": "e88385c7d61837405059fdbd929b353799860cc6",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOSeoW_M8AAAABP0657A",
+          "commit": {
+            "abbreviatedOid": "a6e02fa"
+          },
+          "author": "github-actions",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-29T19:01:40Z",
+          "updatedAt": "2026-09-29T19:01:40Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "````suggestion\n   to require interaction, inform a pending interaction by the\n   end-user or return a deferred response in place of the normal\n````",
+              "createdAt": "2026-09-29T19:01:40Z",
+              "updatedAt": "2026-09-29T19:01:40Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOSeoW_M8AAAABP7kFhQ",
+          "commit": {
+            "abbreviatedOid": "e88385c"
+          },
+          "author": "fkj",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "I think the diagram could still be improved but it might be getting too complicated. For now this is fine, but we should maybe consider splitting it into three different diagrams to make it easier to understand the options?",
+          "createdAt": "2026-09-30T09:07:50Z",
+          "updatedAt": "2026-09-30T09:07:50Z",
           "comments": []
         }
       ]
