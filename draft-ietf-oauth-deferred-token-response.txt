@@ -5,8 +5,8 @@
 Web Authorization Protocol                     G. de Oliveira Niero, Ed.
 Internet-Draft                                                      Itaú
 Intended status: Standards Track                             D. Liu, Ed.
-Expires: 3 April 2027                                      Alibaba Group
-                                                       30 September 2026
+Expires: 18 April 2027                                     Alibaba Group
+                                                         15 October 2026
 
 
                         Deferred Token Response
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 April 2027.
+   This Internet-Draft will expire on 18 April 2027.
 
 Copyright Notice
 
@@ -408,13 +408,18 @@ Table of Contents
    completion_mode  OPTIONAL.  A space-separated list of completion-mode
       values registered in the "OAuth Completion Mode Values" registry
       (Section 13).  Order is not significant, and values MUST NOT be
-      repeated.  This specification defines a single value, deferred:
-      when it is present in the list, the client signals that it is
-      willing to accept a deferred response from the authorization
-      server in place of an immediate token response or error.  If the
-      parameter is absent, or is present but does not include deferred,
-      the client requires synchronous handling.  The authorization
-      server MUST ignore any value it does not recognize.
+      repeated.  This specification defines two values, deferred and
+      deferred_interactive.  When deferred is present in the list, the
+      client signals that it is willing to accept a deferred response
+      from the authorization server in place of an immediate token
+      response or error.  When deferred_interactive is present in the
+      list, the client signals that it is willing to accept a deferred
+      response and is able to surface an interaction to the user or
+      other external actor when the authorization server responds with
+      interaction_required.  If the parameter is absent, or is present
+      but includes neither value, the client requires synchronous
+      handling.  The authorization server MUST ignore any value it does
+      not recognize.
 
    The client signals opt-in to DTR by including deferred among the
    completion_mode values on the originating grant's token endpoint
@@ -1588,12 +1593,23 @@ token=LRGidcSAeVs_xYpEDt5pNx0A0TBr7qPHbh_Se6pfdf4
    *  Specification Document(s): a reference to the document defining
       the value.
 
-   This specification registers the following initial value:
+   This specification registers the following initial values:
 
    *  Value: deferred
 
    *  Description: The client accepts a deferred response (Section 6.4)
       in place of an immediate token response or error.
+
+   *  Change Controller: IETF
+
+   *  Specification Document(s): this specification
+
+   *  Value: deferred_interactive
+
+   *  Description: The client accepts a deferred response (Section 6.4)
+      and is able to surface an interaction to the user or other
+      external actor when the authorization server responds with
+      interaction_required.
 
    *  Change Controller: IETF
 

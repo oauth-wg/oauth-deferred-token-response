@@ -28,18 +28,18 @@ when one is configured.
 <meta content="draft-ietf-oauth-deferred-token-response-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.34.1
-    Python 3.14.7
-    ConfigArgParse 1.7.7
+    Python 3.14.8
+    ConfigArgParse 1.8.0
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.1.1
     natsort 8.4.0
-    platformdirs 4.11.10
+    platformdirs 4.12.2
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.8.4
+    wcwidth 0.9.1
 -->
 <link href="draft-ietf-oauth-deferred-token-response.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1055,11 +1055,11 @@ svg {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">DTR</td>
-<td class="right">September 2026</td>
+<td class="right">October 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">de Oliveira Niero &amp; Liu</td>
-<td class="center">Expires 3 April 2027</td>
+<td class="center">Expires 18 April 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1072,12 +1072,12 @@ svg {
 <dd class="internet-draft">draft-ietf-oauth-deferred-token-response-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-09-30" class="published">30 September 2026</time>
+<time datetime="2026-10-15" class="published">15 October 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-04-03">3 April 2027</time></dd>
+<dd class="expires"><time datetime="2027-04-18">18 April 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1143,7 +1143,7 @@ when one is configured.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 3 April 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 18 April 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1747,11 +1747,15 @@ that purpose.<a href="#section-5-1" class="pilcrow">¶</a></p>
             <p id="section-5.1-1.2.1"><span class="bcp14">OPTIONAL</span>. A space-separated list of completion-mode values registered
 in the "OAuth Completion Mode Values" registry (<a href="#iana-considerations" class="auto internal xref">Section 13</a>).
 Order is not significant, and values <span class="bcp14">MUST NOT</span> be repeated. This
-specification defines a single value, <code>deferred</code>: when it is present
-in the list, the client signals that it is willing to accept a
-deferred response from the authorization server in place of an
-immediate token response or error. If the parameter is absent, or is
-present but does not include <code>deferred</code>, the client requires
+specification defines two values, <code>deferred</code> and <code>deferred_interactive</code>.
+When <code>deferred</code> is present in the list, the client signals that it is
+willing to accept a deferred response from the authorization server in
+place of an immediate token response or error. When
+<code>deferred_interactive</code> is present in the list, the client signals that
+it is willing to accept a deferred response and is able to surface an
+interaction to the user or other external actor when the authorization
+server responds with <code>interaction_required</code>. If the parameter is absent,
+or is present but includes neither value, the client requires
 synchronous handling. The authorization server <span class="bcp14">MUST</span> ignore any value
 it does not recognize.<a href="#section-5.1-1.2.1" class="pilcrow">¶</a></p>
 </dd>
@@ -3197,7 +3201,7 @@ otherwise the registering party.<a href="#section-13.2-3.3.1" class="pilcrow">¶
 value.<a href="#section-13.2-3.4.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-13.2-4">This specification registers the following initial value:<a href="#section-13.2-4" class="pilcrow">¶</a></p>
+<p id="section-13.2-4">This specification registers the following initial values:<a href="#section-13.2-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-13.2-5.1">
             <p id="section-13.2-5.1.1">Value: <code>deferred</code><a href="#section-13.2-5.1.1" class="pilcrow">¶</a></p>
@@ -3212,6 +3216,21 @@ response or error.<a href="#section-13.2-5.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-13.2-5.4">
             <p id="section-13.2-5.4.1">Specification Document(s): this specification<a href="#section-13.2-5.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-13.2-5.5">
+            <p id="section-13.2-5.5.1">Value: <code>deferred_interactive</code><a href="#section-13.2-5.5.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-13.2-5.6">
+            <p id="section-13.2-5.6.1">Description: The client accepts a deferred response
+(<a href="#token-endpoint-deferred-response" class="auto internal xref">Section 6.4</a>) and is able to surface an
+interaction to the user or other external actor when the
+authorization server responds with <code>interaction_required</code>.<a href="#section-13.2-5.6.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-13.2-5.7">
+            <p id="section-13.2-5.7.1">Change Controller: IETF<a href="#section-13.2-5.7.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-13.2-5.8">
+            <p id="section-13.2-5.8.1">Specification Document(s): this specification<a href="#section-13.2-5.8.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
