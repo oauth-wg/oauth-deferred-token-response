@@ -2402,35 +2402,45 @@ identifies a location where the interaction can take place. A client
 receiving this response <span class="bcp14">SHOULD</span> present the <code>interaction_uri</code> to the
 user (or other external actor) as appropriate for the application
 and continues polling at the rate established by <code>interval</code>.<a href="#section-6.6-4.4.1" class="pilcrow">¶</a></p>
-<p id="section-6.6-4.4.2">Transitions between <code>authorization_pending</code> and <code>interaction_required</code>
-              <span class="bcp14">MAY</span> occur in either direction during the lifetime of a deferred
-request; both are non-terminal pending states observed externally
-through the polling state machine.<a href="#section-6.6-4.4.2" class="pilcrow">¶</a></p>
-<p id="section-6.6-4.4.3">This specification uses the <code>interaction_required</code> error code with
+<p id="section-6.6-4.4.2">This specification uses the <code>interaction_required</code> error code with
 the token endpoint semantics defined here. The error name is
 registered in the OAuth Extensions Error Registry by <span>[<a href="#OIDC-CORE" class="cite xref">OIDC-CORE</a>]</span>
 for authorization endpoint use; the IANA action in
 <a href="#iana-considerations" class="auto internal xref">Section 13</a> updates that registration to add token
-endpoint response usage.<a href="#section-6.6-4.4.3" class="pilcrow">¶</a></p>
+endpoint response usage.<a href="#section-6.6-4.4.2" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-6.6-4.5"><code>slow_down</code></dt>
+<dt id="section-6.6-4.5"><code>interaction_pending</code></dt>
           <dd style="margin-left: 1.5em" id="section-6.6-4.6">
-            <p id="section-6.6-4.6.1">The client is polling faster than <code>interval</code> allows. The client <span class="bcp14">MUST</span>
-increase its polling interval as described in <a href="#token-endpoint-polling" class="auto internal xref">Section 6.5</a>.<a href="#section-6.6-4.6.1" class="pilcrow">¶</a></p>
+            <p id="section-6.6-4.6.1">The deferred request is pending, and the external interaction
+associated with it has already been initiated, either by the client
+(for example, the user has been directed to the <code>interaction_uri</code>)
+or by the authorization server, but has not yet completed. The
+authorization server <span class="bcp14">MUST</span> return this error only when it can observe
+that the interaction has begun. A client <span class="bcp14">SHOULD</span> continue polling
+at the rate established by <code>interval</code>.<a href="#section-6.6-4.6.1" class="pilcrow">¶</a></p>
+<p id="section-6.6-4.6.2"><code>authorization_pending</code>, <code>interaction_required</code>, and
+<code>interaction_pending</code> are non-terminal pending states.
+A client <span class="bcp14">MUST NOT</span> treat these states as terminal.<a href="#section-6.6-4.6.2" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-6.6-4.7"><code>expired_token</code></dt>
+<dt id="section-6.6-4.7"><code>slow_down</code></dt>
           <dd style="margin-left: 1.5em" id="section-6.6-4.8">
-            <p id="section-6.6-4.8.1">The <code>deferral_code</code> has expired. The client <span class="bcp14">MUST</span> stop polling with
-this <code>deferral_code</code> and <span class="bcp14">MAY</span> initiate a new flow.<a href="#section-6.6-4.8.1" class="pilcrow">¶</a></p>
+            <p id="section-6.6-4.8.1">The client is polling faster than <code>interval</code> allows. The client <span class="bcp14">MUST</span>
+increase its polling interval as described in <a href="#token-endpoint-polling" class="auto internal xref">Section 6.5</a>.<a href="#section-6.6-4.8.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-6.6-4.9"><code>access_denied</code></dt>
+<dt id="section-6.6-4.9"><code>expired_token</code></dt>
           <dd style="margin-left: 1.5em" id="section-6.6-4.10">
-            <p id="section-6.6-4.10.1">The deferred request was denied — for example, because the
+            <p id="section-6.6-4.10.1">The <code>deferral_code</code> has expired. The client <span class="bcp14">MUST</span> stop polling with
+this <code>deferral_code</code> and <span class="bcp14">MAY</span> initiate a new flow.<a href="#section-6.6-4.10.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-6.6-4.11"><code>access_denied</code></dt>
+          <dd style="margin-left: 1.5em" id="section-6.6-4.12">
+            <p id="section-6.6-4.12.1">The deferred request was denied — for example, because the
 authorization could not be granted, or because the request was
-cancelled per <a href="#cancellation" class="auto internal xref">Section 8</a>.<a href="#section-6.6-4.10.1" class="pilcrow">¶</a></p>
+cancelled per <a href="#cancellation" class="auto internal xref">Section 8</a>.<a href="#section-6.6-4.12.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
