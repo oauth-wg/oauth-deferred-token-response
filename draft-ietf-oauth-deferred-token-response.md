@@ -364,11 +364,15 @@ that purpose.
 : OPTIONAL. A space-separated list of completion-mode values registered
   in the "OAuth Completion Mode Values" registry ({{iana-considerations}}).
   Order is not significant, and values MUST NOT be repeated. This
-  specification defines a single value, `deferred`: when it is present
-  in the list, the client signals that it is willing to accept a
-  deferred response from the authorization server in place of an
-  immediate token response or error. If the parameter is absent, or is
-  present but does not include `deferred`, the client requires
+  specification defines two values, `deferred` and `deferred_interactive`.
+  When `deferred` is present in the list, the client signals that it is
+  willing to accept a deferred response from the authorization server in
+  place of an immediate token response or error. When
+  `deferred_interactive` is present in the list, the client signals that
+  it is willing to accept a deferred response and is able to surface an
+  interaction to the user or other external actor when the authorization
+  server responds with `interaction_required`. If the parameter is absent,
+  or is present but includes neither value, the client requires
   synchronous handling. The authorization server MUST ignore any value
   it does not recognize.
 
@@ -1584,12 +1588,20 @@ The registry follows the "Specification Required" registration policy
 - Specification Document(s): a reference to the document defining the
   value.
 
-This specification registers the following initial value:
+This specification registers the following initial values:
 
 - Value: `deferred`
 - Description: The client accepts a deferred response
   ({{token-endpoint-deferred-response}}) in place of an immediate token
   response or error.
+- Change Controller: IETF
+- Specification Document(s): this specification
+
+- Value: `deferred_interactive`
+- Description: The client accepts a deferred response
+  ({{token-endpoint-deferred-response}}) and is able to surface an
+  interaction to the user or other external actor when the
+  authorization server responds with `interaction_required`.
 - Change Controller: IETF
 - Specification Document(s): this specification
 
