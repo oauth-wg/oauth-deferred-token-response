@@ -936,17 +936,25 @@ aligned with the corresponding codes in {{Section 3.5 of RFC8628}}:
   user (or other external actor) as appropriate for the application
   and continues polling at the rate established by `interval`.
 
-  Transitions between `authorization_pending` and `interaction_required`
-  MAY occur in either direction during the lifetime of a deferred
-  request; both are non-terminal pending states observed externally
-  through the polling state machine.
-
   This specification uses the `interaction_required` error code with
   the token endpoint semantics defined here. The error name is
   registered in the OAuth Extensions Error Registry by {{OIDC-CORE}}
   for authorization endpoint use; the IANA action in
   {{iana-considerations}} updates that registration to add token
   endpoint response usage.
+
+`interaction_pending`
+: The deferred request is pending, and the external interaction
+  associated with it has already been initiated, either by the client
+  (for example, the user has been directed to the `interaction_uri`)
+  or by the authorization server, but has not yet completed. The
+  authorization server MUST return this error only when it can observe
+  that the interaction has begun. A client SHOULD continue polling
+  at the rate established by `interval`.
+
+  `authorization_pending`, `interaction_required`, and
+  `interaction_pending` are non-terminal pending states.
+  A client MUST NOT treat these states as terminal.
 
 `slow_down`
 : The client is polling faster than `interval` allows. The client MUST
