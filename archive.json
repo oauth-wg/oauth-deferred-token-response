@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-11T00:11:43.380723+00:00",
+  "timestamp": "2026-10-18T00:10:19.480502+00:00",
   "repo": "oauth-wg/oauth-deferred-token-response",
   "labels": [
     {
@@ -1061,15 +1061,15 @@
       "id": "I_kwDOSeoW_M8AAAABMGDLpg",
       "title": "Add interaction_pending error code",
       "url": "https://github.com/oauth-wg/oauth-deferred-token-response/issues/57",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "maxpassion",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "## Background\n\nKarl's PR #49 introduces interaction_required and interaction_uri to DTR, but uses a single interaction_required. This may make client-side state management ambiguous. We should distinguish three states, each requiring a different client action.\n\n## Proposal: Dual-driver semantics\n\nPer discussion with Max Gerber, both the client (via interaction_uri) and the AS (via internal notification channels) can drive interaction in parallel. Either path may complete first. \n- interaction_required: client MUST initiate interaction with the user\n- interaction_pending: Either the client has already initiated interaction, or the AS has already initiated interaction. Client MAY initiate interaction again and should continue to nudge the user.\n- authorization_pending: Entirely the responsibility of the AS to finish the job.",
       "createdAt": "2026-08-10T04:29:15Z",
-      "updatedAt": "2026-08-26T02:57:14Z",
-      "closedAt": null,
+      "updatedAt": "2026-10-15T14:29:39Z",
+      "closedAt": "2026-10-15T14:29:39Z",
       "comments": [
         {
           "author": "mcguinness",
@@ -1134,15 +1134,15 @@
       "id": "I_kwDOSeoW_M8AAAABMGxO9g",
       "title": "Define completion_mode parameter for interactive mode",
       "url": "https://github.com/oauth-wg/oauth-deferred-token-response/issues/58",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "maxpassion",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "## Background\n\nBefore the AS can return `interaction_required`, it needs to know whether the client supports interaction, i.e., whether the client can deliver an `interaction_uri` to the user.\n\n## Proposal\n\nUse the existing `completion_mode` parameter with two values to declare client capability:\n\n| Value | Deferred Polling | Interaction |\n|---|---|---|\n| `deferred` | Yes | No |\n| `deferred_interactive` | Yes | Yes |\n",
       "createdAt": "2026-08-10T06:38:42Z",
-      "updatedAt": "2026-09-07T08:36:04Z",
-      "closedAt": null,
+      "updatedAt": "2026-10-15T14:12:54Z",
+      "closedAt": "2026-10-15T14:12:54Z",
       "comments": [
         {
           "author": "maxpassion",
@@ -1174,16 +1174,24 @@
       "id": "I_kwDOSeoW_M8AAAABMG_BuA",
       "title": "Add independent expires_in for interaction session timeout",
       "url": "https://github.com/oauth-wg/oauth-deferred-token-response/issues/60",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "maxpassion",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "## Background\n\nDTR currently defines a single `expires_in` for the deferral code lifetime. \n\n## Proposal\n\nDefine two independent lifecycles:\n\n1. Deferral time (existing `expires_in`): The overall validity of the deferred token request. After expiry, the client MUST initiate a new token request. Typically longer.\n\n2. Interaction session lifetime (new): The validity of the `interaction_uri` and associated interaction session. After expiry, the `interaction_uri` becomes invalid, but the deferral state MAY still be valid. Typically short, paired with single-use requirement.",
       "createdAt": "2026-08-10T07:12:38Z",
-      "updatedAt": "2026-08-10T07:12:38Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-10-15T14:48:48Z",
+      "closedAt": "2026-10-15T14:46:03Z",
+      "comments": [
+        {
+          "author": "maxpassion",
+          "authorAssociation": "COLLABORATOR",
+          "body": "resolved and merged : https://github.com/oauth-wg/oauth-deferred-token-response/pull/68",
+          "createdAt": "2026-10-15T14:48:47Z",
+          "updatedAt": "2026-10-15T14:48:47Z"
+        }
+      ]
     },
     {
       "number": 61,
@@ -2735,24 +2743,26 @@
       "id": "PR_kwDOSeoW_M8AAAABBBZjeA",
       "title": "Add interaction_pending error code (closes issue #57)",
       "url": "https://github.com/oauth-wg/oauth-deferred-token-response/pull/68",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "maxpassion",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Implements the consensus in issue [#57](https://github.com/maxwellgerber/deferred-token-response/issues/57): distinguish three pending states using distinct error codes.\r\n\r\n",
       "createdAt": "2026-08-26T02:53:34Z",
-      "updatedAt": "2026-09-16T12:32:38Z",
+      "updatedAt": "2026-10-15T14:29:38Z",
       "baseRepository": "oauth-wg/oauth-deferred-token-response",
       "baseRefName": "main",
-      "baseRefOid": "90dfe6431b09134bc507a94825dbc0b570640a74",
+      "baseRefOid": "72860452c245d08aa1ecbceb060a076db06b0a39",
       "headRepository": "oauth-wg/oauth-deferred-token-response",
       "headRefName": "maxpassion-patch-1",
-      "headRefOid": "e15cdeec9b1f056560033bc352892645438ef763",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "baeb577e6ed91ba3c03df68e39e9ed1788a73c7b",
+      "closedAt": "2026-10-15T14:29:37Z",
+      "mergedAt": "2026-10-15T14:29:37Z",
+      "mergedBy": "maxpassion",
+      "mergeCommit": {
+        "oid": "0eed60c594d1b61e64b7f56e826ba80e9c0bcfbf"
+      },
       "comments": [
         {
           "author": "maxpassion",
@@ -3222,24 +3232,26 @@
       "id": "PR_kwDOSeoW_M8AAAABCfN7_A",
       "title": "Add deferred_interactive completion mode value (closes #58)",
       "url": "https://github.com/oauth-wg/oauth-deferred-token-response/pull/71",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "maxpassion",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Resolves #58.",
       "createdAt": "2026-09-07T08:29:09Z",
-      "updatedAt": "2026-09-16T12:31:03Z",
+      "updatedAt": "2026-10-15T14:12:53Z",
       "baseRepository": "oauth-wg/oauth-deferred-token-response",
       "baseRefName": "main",
-      "baseRefOid": "ba931fadf63d07af5f9f5be76e6fb583be30e3a1",
+      "baseRefOid": "400158455843b11d13336dda3c8a4303c41e1f08",
       "headRepository": "oauth-wg/oauth-deferred-token-response",
       "headRefName": "maxpassion-patch-3",
-      "headRefOid": "38537969de68014f5c4df8e4cef7e9b4136abe48",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "b7cb4dcbe2edbac64112aa71b0510160eff92458",
+      "closedAt": "2026-10-15T14:12:52Z",
+      "mergedAt": "2026-10-15T14:12:52Z",
+      "mergedBy": "maxpassion",
+      "mergeCommit": {
+        "oid": "72860452c245d08aa1ecbceb060a076db06b0a39"
+      },
       "comments": [
         {
           "author": "maxwellgerber",
@@ -3393,7 +3405,7 @@
       "labels": [],
       "body": "# Problem\r\nThe current diagram doesn't show all the possible completion mode states\r\n\r\n# Changes\r\n\r\n- Diagram \r\n  - Changes `Auth request` for `Pre-token request` to match the document section we already have\r\n  - Adds [A], [B] and [C] states for the deferral response\r\n - Overview\r\n   - Updates the description that only mentioned `deferred` as the `completion_mode`, leaving it open to any supported value\r\n\r\nCloses #64",
       "createdAt": "2026-09-29T19:01:09Z",
-      "updatedAt": "2026-09-30T09:07:50Z",
+      "updatedAt": "2026-10-16T16:51:18Z",
       "baseRepository": "oauth-wg/oauth-deferred-token-response",
       "baseRefName": "main",
       "baseRefOid": "173bdf074b8d016503119c6e0e963370ce302acb",
@@ -3404,7 +3416,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "gniero",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I think the diagram could still be improved but it might be getting too complicated. For now this is fine, but we should maybe consider splitting it into three different diagrams to make it easier to understand the options?\r\n\r\nI guess we could do it, perhaps accomodating within sub sections for each? \r\nShould we leave an open issue for it?",
+          "createdAt": "2026-10-16T16:51:18Z",
+          "updatedAt": "2026-10-16T16:51:18Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOSeoW_M8AAAABP0657A",
@@ -3437,6 +3457,19 @@
           "body": "I think the diagram could still be improved but it might be getting too complicated. For now this is fine, but we should maybe consider splitting it into three different diagrams to make it easier to understand the options?",
           "createdAt": "2026-09-30T09:07:50Z",
           "updatedAt": "2026-09-30T09:07:50Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOSeoW_M8AAAABSefADw",
+          "commit": {
+            "abbreviatedOid": "e88385c"
+          },
+          "author": "maxpassion",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Looks good for me.",
+          "createdAt": "2026-10-15T14:36:43Z",
+          "updatedAt": "2026-10-15T14:36:43Z",
           "comments": []
         }
       ]
