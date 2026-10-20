@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-18T00:10:19.480502+00:00",
+  "timestamp": "2026-10-20T00:09:32.308422+00:00",
   "repo": "oauth-wg/oauth-deferred-token-response",
   "labels": [
     {
@@ -1317,6 +1317,22 @@
       "body": "**Problem**\nSender-Constraint Requirements bind the access token issued on polling to the key that bound the deferral code. Substrate Guarantee 3 (\"Sender-constraining continuity\") extends this to \"the final token response\" and requires profiles to preserve it. Both assume that the client that polls is also the party that presents the token.\n\nThat assumption fails for draft-rosomakho-oauth-txn-challenge, which uses DTR to handle approvals that can't complete immediately ([PR #21](https://github.com/yaroslavros/oauth-txn-challenge/pull/21)). A protected resource returns a signed challenge to an agent, which relays it to a client. The client presents the challenge at the token endpoint, and the agent presents the resulting token. For key binding, the challenge carries a `cnf` that identifies the agent's key. Sender-Constraint Requirements say a public client MUST send DPoP, so DTR binds the token to the client's key instead, and the agent can't use it.\n\n**Proposal**\nKeep the deferral-code binding as it is, and let the originating grant define how the issued token is bound:\n- Sender-Constraint Requirements: \"\u2026the issued access token MUST be DPoP-bound to the same key, unless the originating grant defines how the issued access token is bound.\"\n- Guarantee 3: \"\u2026applies to every polling request and, unless the originating grant defines otherwise, to the final token response.\"\n\nSubstitution protection is unchanged. Every poll still needs a proof from the deferral-code key. The alternative key has to come from the originating request, which polling can't modify (Guarantee 4).\n",
       "createdAt": "2026-10-09T20:38:21Z",
       "updatedAt": "2026-10-09T20:38:21Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 76,
+      "id": "I_kwDOSeoW_M8AAAABYPFYtg",
+      "title": "Split overview diagram to reduce complexity",
+      "url": "https://github.com/oauth-wg/oauth-deferred-token-response/issues/76",
+      "state": "OPEN",
+      "author": "fkj",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The consolidated overview diagram after merging the specs is quite complex and it is not easy to see what the intended flows actually are.\n\nWe should consider splitting it into three different diagrams to make it easier to understand the options, as agreed in discussion of #74.",
+      "createdAt": "2026-10-19T09:34:07Z",
+      "updatedAt": "2026-10-19T09:34:07Z",
       "closedAt": null,
       "comments": []
     }
@@ -3405,7 +3421,7 @@
       "labels": [],
       "body": "# Problem\r\nThe current diagram doesn't show all the possible completion mode states\r\n\r\n# Changes\r\n\r\n- Diagram \r\n  - Changes `Auth request` for `Pre-token request` to match the document section we already have\r\n  - Adds [A], [B] and [C] states for the deferral response\r\n - Overview\r\n   - Updates the description that only mentioned `deferred` as the `completion_mode`, leaving it open to any supported value\r\n\r\nCloses #64",
       "createdAt": "2026-09-29T19:01:09Z",
-      "updatedAt": "2026-10-16T16:51:18Z",
+      "updatedAt": "2026-10-19T09:34:25Z",
       "baseRepository": "oauth-wg/oauth-deferred-token-response",
       "baseRefName": "main",
       "baseRefOid": "173bdf074b8d016503119c6e0e963370ce302acb",
@@ -3423,6 +3439,13 @@
           "body": "> I think the diagram could still be improved but it might be getting too complicated. For now this is fine, but we should maybe consider splitting it into three different diagrams to make it easier to understand the options?\r\n\r\nI guess we could do it, perhaps accomodating within sub sections for each? \r\nShould we leave an open issue for it?",
           "createdAt": "2026-10-16T16:51:18Z",
           "updatedAt": "2026-10-16T16:51:18Z"
+        },
+        {
+          "author": "fkj",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I guess we could do it, perhaps accomodating within sub sections for each? Should we leave an open issue for it?\r\n\r\nYes, I think we can skip it for now. I opened #76 so we don't forget later.",
+          "createdAt": "2026-10-19T09:34:25Z",
+          "updatedAt": "2026-10-19T09:34:25Z"
         }
       ],
       "reviews": [
