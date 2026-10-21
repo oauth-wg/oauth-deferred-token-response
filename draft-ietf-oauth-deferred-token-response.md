@@ -441,7 +441,7 @@ received earlier.
 Where the authorization request is not sent directly to the
 authorization endpoint, `completion_mode` is conveyed wherever the
 request's other authorization parameters are conveyed — for example, in
-the request body of a Pushed Authorization Request (PAR){{RFC9126}} or 
+the request body of a Pushed Authorization Request (PAR){{RFC9126}} or
 as a member of a JWT-secured authorization request object (JAR).
 
 An authorization server MAY act on the hint by selecting a
