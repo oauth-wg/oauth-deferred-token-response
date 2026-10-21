@@ -642,7 +642,6 @@ The client MAY also include the following parameter:
   A client that registers a `deferred_client_notification_endpoint`
   SHOULD include a `client_notification_token`; without one, the client
   cannot authenticate inbound callbacks (see {{callback-endpoint-validation}}).
-  
 `redirect_uri`
 : OPTIONAL. The URI to which the authorization server will redirect the
   user's browser after the interaction is complete. If the client
