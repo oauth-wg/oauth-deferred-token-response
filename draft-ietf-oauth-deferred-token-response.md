@@ -53,6 +53,7 @@ normative:
   RFC9700:
   RFC6750:
   RFC8628:
+  RFC9126:
   RFC8705:
   OAUTH-2.1: I-D.draft-ietf-oauth-v2-1
 
@@ -107,7 +108,7 @@ a token response or an error response.
 However, some authorization decisions cannot complete synchronously:
 
 - Fraud Prevention: Sensitive operations may trigger manual review by
-  parties other than the resource owner.
+  ties other than the resource owner.
 
 - ID Verification: Users may submit copies of physical credentials
   during onboarding or step-up. Verification by the authorization server
@@ -440,8 +441,8 @@ received earlier.
 Where the authorization request is not sent directly to the
 authorization endpoint, `completion_mode` is conveyed wherever the
 request's other authorization parameters are conveyed — for example, in
-the request body of a Pushed Authorization Request (PAR) or as a member
-of a JWT-secured authorization request object (JAR).
+the request body of a Pushed Authorization Request (PAR){{RFC9126}} or
+as a member of a JWT-secured authorization request object (JAR).
 
 An authorization server MAY act on the hint by selecting a
 deferral-aware path for the originating grant — for example, by
