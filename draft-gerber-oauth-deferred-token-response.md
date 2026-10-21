@@ -1110,12 +1110,6 @@ The client makes an HTTP POST request to the revocation endpoint per
 
 The client authenticates to the revocation endpoint as required by its
 registered authentication method per {{Section 2.4 of OAUTH-2.1}}.
-When the deferral code being revoked was bound to a DPoP key on the
-initial token request ({{sender-constraint-requirements}}), the
-revocation request MUST also carry a DPoP proof signed by that key.
-This prevents a party that has merely observed the deferral code — for
-example, in a front-channel URL, browser history, or a log — from
-cancelling the pending request.
 
 The following is a non-normative example:
 
