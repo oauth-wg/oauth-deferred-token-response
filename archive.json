@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-20T00:09:32.308422+00:00",
+  "timestamp": "2026-10-22T00:08:47.466152+00:00",
   "repo": "oauth-wg/oauth-deferred-token-response",
   "labels": [
     {
@@ -302,9 +302,17 @@
       ],
       "body": "The Relationship section contrasts only CIBA:\n\nhttps://github.com/maxwellgerber/deferred-token-response/blob/487572d24861dcf388e00202bdadf4701fc28ea6/draft-oauth-deferred-token-response.md?plain=1#L1057-L1085\n\nDevice Authorization Grant is contrasted inline in the beginning, but would make sense to do more in this section:\nhttps://github.com/maxwellgerber/deferred-token-response/blob/487572d24861dcf388e00202bdadf4701fc28ea6/draft-oauth-deferred-token-response.md?plain=1#L133-L142\n\nMight also make sense to compare to regular Token Exchange and First Party Apps.",
       "createdAt": "2026-05-22T08:49:10Z",
-      "updatedAt": "2026-05-22T08:49:10Z",
+      "updatedAt": "2026-10-21T04:05:04Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "maxpassion",
+          "authorAssociation": "COLLABORATOR",
+          "body": "GNAP and UMA are not mentioned yet. https://github.com/oauth-wg/oauth-deferred-token-response/issues/62",
+          "createdAt": "2026-10-21T04:05:04Z",
+          "updatedAt": "2026-10-21T04:05:04Z"
+        }
+      ]
     },
     {
       "number": 9,
@@ -1163,9 +1171,9 @@
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "## Background\n\nDTR currently defines a server-to-server callback mechanism for notifying clients that a deferred request is complete. This covers headless agents with a backend endpoint.\n\nHowever, browser-based agents need a front-channel mechanism to bring the user's browser back to the agent's UI after interaction completes. This mechanism is defined in JAG-IR draft: https://datatracker.ietf.org/doc/html/draft-parecki-oauth-jwt-grant-interaction-response-00#name-token-request \n\n## Proposal\n\nAdd `redirect_uri` as an OPTIONAL parameter in the initial token request, enabling redirect-based completion as a complement to polling and server-to-server callback.\n",
+      "body": "## Background\n\nDTR currently defines a server-to-server callback mechanism for notifying clients that a deferred request is complete. This covers headless agents with a backend endpoint.\n\nHowever, browser-based agents need a front-channel mechanism to bring the user's browser back to the agent's UI after interaction completes. This mechanism is defined in JAG-IR draft: https://datatracker.ietf.org/doc/html/draft-parecki-oauth-jwt-grant-interaction-response-00#name-token-request \n\n## Proposal\n\nAdd `redirect_uri` as an OPTIONAL parameter in the initial token request, enabling redirect-based completion as a complement to polling and server-to-server callback. https://github.com/oauth-wg/oauth-deferred-token-response/pull/79\n",
       "createdAt": "2026-08-10T06:52:02Z",
-      "updatedAt": "2026-08-10T06:52:02Z",
+      "updatedAt": "2026-10-21T10:53:00Z",
       "closedAt": null,
       "comments": []
     },
@@ -1236,7 +1244,7 @@
       "labels": [],
       "body": "## Question\n\nWhich grant types are compatible with the interactive mode, and which are not?",
       "createdAt": "2026-08-10T07:20:15Z",
-      "updatedAt": "2026-08-29T13:41:12Z",
+      "updatedAt": "2026-10-21T02:17:15Z",
       "closedAt": null,
       "comments": [
         {
@@ -1252,6 +1260,13 @@
           "body": "Whether a grant type is compatible is a property of the client, whether the client is capable of surfacing an interaction to the user, and whether the client wishes to do so at that time. If an Authorization Server doesn't support the interactive mode - or the deferred token response mode - then the Authorization Server doesn't need to return that shape of response and not much negotiation is needed. There isn't a one-size-fits-all recommendation we can roll out, which is why I'm a fan of per-transaction opting-in semantics over metadata based approaches. \n\nAs an example - I can configure a CLI tool with a Client ID and Client Secret to use the `client_credentials` grant - which is normally not an interactive grant. If I run that CLI from inside a cron job or CI pipeline, that client can't support the interactive mode. However, if I run the same CLI from an interactive terminal, then the client _can_ support the interactive mode.\n\n",
           "createdAt": "2026-08-29T13:41:12Z",
           "updatedAt": "2026-08-29T13:41:12Z"
+        },
+        {
+          "author": "maxpassion",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Justin Richer commented in IETF 126 OAuth WG, minutes: https://datatracker.ietf.org/doc/minutes-126-oauth-202607231200/\n\n> Justin Richer: +1, consider past UMA in GNAP, CIBA as referenced.\n> also please consider PAR and device flow.\n\nThe GNAP/UMA/CIBA half is tracked in #8 (CIBA already has it own section; GNAP and UMA are not mentioned yet).\n\nDevice flow is covered; PAR is a passing mention in Pre-Token Hints with no RFC 9126 reference.\nSo the missing piece may just be the citation: reference RFC 9126 there and add it to the normative references. I have opened a PR: https://github.com/oauth-wg/oauth-deferred-token-response/pull/78.",
+          "createdAt": "2026-10-20T16:20:15Z",
+          "updatedAt": "2026-10-21T02:17:15Z"
         }
       ]
     },
@@ -1291,7 +1306,7 @@
       "id": "I_kwDOSeoW_M8AAAABMHGCpQ",
       "title": "Add complete workflow illustration for the interaction flow",
       "url": "https://github.com/oauth-wg/oauth-deferred-token-response/issues/64",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "maxpassion",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -1300,8 +1315,8 @@
       "labels": [],
       "body": "The current DTR draft does not include a workflow diagram showing how deferred response and `interaction_required` fit together.\n\nAdd a workflow diagram showing the complete DTR + interaction flow.",
       "createdAt": "2026-08-10T07:28:54Z",
-      "updatedAt": "2026-09-29T14:11:57Z",
-      "closedAt": null,
+      "updatedAt": "2026-10-20T10:36:28Z",
+      "closedAt": "2026-10-20T10:36:28Z",
       "comments": []
     },
     {
@@ -2697,21 +2712,21 @@
       "id": "PR_kwDOSeoW_M7_Ov3W",
       "title": "Sender-constrain the revocation endpoint and bind issued refresh tokens",
       "url": "https://github.com/oauth-wg/oauth-deferred-token-response/pull/67",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "gniero",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Resolves #12, Resolves #53\r\n\r\n**Sender-Constraint Requirements bound only the issued access token to the DPoP key:** \r\n- Added that any refresh token issued alongside it MUST likewise be sender-constrained to the same key, per RFC 9449 \u00a75 (which already requires this for public clients).\r\n\r\n**Sender-Constraint Requirements for revocation**:\r\n- A revocation presenting a DPoP-bound deferral code MUST carry a DPoP proof for that key.\r\n- Preserves the existing anti-enumeration posture of the revocation endpoint (a distinguishable invalid_dpop_proof would leak code validity).\r\n- Adds a paragraph (mentioning Section 5 of RFC7009) explaining that the deferral_code and other tokens have distinct attack surfaces, clarifying why the sender constraining matters",
       "createdAt": "2026-08-14T17:51:51Z",
-      "updatedAt": "2026-08-20T14:57:33Z",
+      "updatedAt": "2026-10-21T13:50:01Z",
       "baseRepository": "oauth-wg/oauth-deferred-token-response",
       "baseRefName": "main",
       "baseRefOid": "90dfe6431b09134bc507a94825dbc0b570640a74",
       "headRepository": "oauth-wg/oauth-deferred-token-response",
       "headRefName": "sender-constraint-continuity",
-      "headRefOid": "a4b799bc7e1251b372b04bcf2923796acf3e6743",
-      "closedAt": null,
+      "headRefOid": "b843374d7eca605850559f565f14f34970d3da2b",
+      "closedAt": "2026-10-21T13:50:01Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -2736,6 +2751,20 @@
           "body": "This PR addresses more to revocation than refresh tokens, so I wonder if we need a new PR - instead I can just remove the refresh tokens part:\r\n\r\nCurrent paragraph on acess tokens / refresh tokens states\r\n>the issued access token MUST be\r\nDPoP-bound to the same key, consistent with {{Section 5 of RFC9449}}.\r\n\r\nand I added\r\n>Any refresh token issued alongside it MUST likewise be\r\nsender-constrained to that key, as {{Section 5 of RFC9449}} requires\r\nfor refresh tokens issued to public clients.\r\n\r\nWe probably don't need this additional text, since it just references a behavior that should be expected.",
           "createdAt": "2026-08-20T14:57:33Z",
           "updatedAt": "2026-08-20T14:57:33Z"
+        },
+        {
+          "author": "maxpassion",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Following up on the discussion, I think it makes sense to close this PR for now.\r\n\r\nWe can raise the topic of DPoP-bound revocation (or alternative DoS mitigations) as an open issue at the upcoming IETF 127 WG meeting to gather collective feedback.\r\n\r\nIf @gniero agrees, we can close this and use Issue #53 to track it for now.\r\n\r\nBy the way, this topic (though not specifically regarding revocation) was also brought up at the IETF 126 WG meeting (see minutes): https://datatracker.ietf.org/doc/minutes-126-oauth-202607231200/\r\n\r\n> George Fletcher: sender constrain the deferred code\r\n",
+          "createdAt": "2026-10-21T03:18:23Z",
+          "updatedAt": "2026-10-21T03:22:12Z"
+        },
+        {
+          "author": "gniero",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I support closing this for now since it has proven to be too controversial between the authors, and we didn't get more input to justify why it should be in the spec.",
+          "createdAt": "2026-10-21T13:50:01Z",
+          "updatedAt": "2026-10-21T13:50:01Z"
         }
       ],
       "reviews": [
@@ -2751,6 +2780,26 @@
           "createdAt": "2026-08-15T22:23:30Z",
           "updatedAt": "2026-08-15T22:23:30Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOSeoW_M8AAAABTXTP-w",
+          "commit": {
+            "abbreviatedOid": "a4b799b"
+          },
+          "author": "maxpassion",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-10-21T03:03:48Z",
+          "updatedAt": "2026-10-21T03:03:48Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\n```",
+              "createdAt": "2026-10-21T03:03:48Z",
+              "updatedAt": "2026-10-21T03:03:48Z"
+            }
+          ]
         }
       ]
     },
@@ -3414,24 +3463,26 @@
       "id": "PR_kwDOSeoW_M8AAAABFweDeQ",
       "title": "Updates Overview section to include interaction states",
       "url": "https://github.com/oauth-wg/oauth-deferred-token-response/pull/74",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "gniero",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "# Problem\r\nThe current diagram doesn't show all the possible completion mode states\r\n\r\n# Changes\r\n\r\n- Diagram \r\n  - Changes `Auth request` for `Pre-token request` to match the document section we already have\r\n  - Adds [A], [B] and [C] states for the deferral response\r\n - Overview\r\n   - Updates the description that only mentioned `deferred` as the `completion_mode`, leaving it open to any supported value\r\n\r\nCloses #64",
       "createdAt": "2026-09-29T19:01:09Z",
-      "updatedAt": "2026-10-19T09:34:25Z",
+      "updatedAt": "2026-10-20T10:49:23Z",
       "baseRepository": "oauth-wg/oauth-deferred-token-response",
       "baseRefName": "main",
       "baseRefOid": "173bdf074b8d016503119c6e0e963370ce302acb",
       "headRepository": "oauth-wg/oauth-deferred-token-response",
       "headRefName": "workflow-illustration-update",
       "headRefOid": "e88385c7d61837405059fdbd929b353799860cc6",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-10-20T10:36:27Z",
+      "mergedAt": "2026-10-20T10:36:27Z",
+      "mergedBy": "gniero",
+      "mergeCommit": {
+        "oid": "09cfcd44186eb75c98190e2ddb21488df19d460c"
+      },
       "comments": [
         {
           "author": "gniero",
@@ -3446,6 +3497,20 @@
           "body": "> I guess we could do it, perhaps accomodating within sub sections for each? Should we leave an open issue for it?\r\n\r\nYes, I think we can skip it for now. I opened #76 so we don't forget later.",
           "createdAt": "2026-10-19T09:34:25Z",
           "updatedAt": "2026-10-19T09:34:25Z"
+        },
+        {
+          "author": "maxpassion",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hi @gniero, with the diagram split tracked in #76  I think this is ready to merge. \r\n\r\n Could you take a final look before the 11-02 cutoff? Then we can publish -01 in time for WG discussion at IETF 127.",
+          "createdAt": "2026-10-20T10:33:02Z",
+          "updatedAt": "2026-10-20T10:33:02Z"
+        },
+        {
+          "author": "gniero",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks for all the reviews, it's merged",
+          "createdAt": "2026-10-20T10:49:06Z",
+          "updatedAt": "2026-10-20T10:49:06Z"
         }
       ],
       "reviews": [
@@ -3455,7 +3520,7 @@
             "abbreviatedOid": "a6e02fa"
           },
           "author": "github-actions",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-09-29T19:01:40Z",
@@ -3494,6 +3559,128 @@
           "createdAt": "2026-10-15T14:36:43Z",
           "updatedAt": "2026-10-15T14:36:43Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 77,
+      "id": "PR_kwDOSeoW_M8AAAABJljKJQ",
+      "title": "Add interaction_pending error code in IANA section",
+      "url": "https://github.com/oauth-wg/oauth-deferred-token-response/pull/77",
+      "state": "OPEN",
+      "author": "maxpassion",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Adds the IANA registration request for the new interaction_pending error code added in PR #68.",
+      "createdAt": "2026-10-20T15:41:44Z",
+      "updatedAt": "2026-10-20T15:42:03Z",
+      "baseRepository": "oauth-wg/oauth-deferred-token-response",
+      "baseRefName": "main",
+      "baseRefOid": "09cfcd44186eb75c98190e2ddb21488df19d460c",
+      "headRepository": "oauth-wg/oauth-deferred-token-response",
+      "headRefName": "maxpassion-patch-2",
+      "headRefOid": "756f76266fc1be7be2733c27724946b17d297cb1",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 78,
+      "id": "PR_kwDOSeoW_M8AAAABJsL23w",
+      "title": "Add RFC 9126 reference for Pushed Authorization Requests",
+      "url": "https://github.com/oauth-wg/oauth-deferred-token-response/pull/78",
+      "state": "OPEN",
+      "author": "maxpassion",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "editorial"
+      ],
+      "body": "Add RFC 9126 reference for Pushed Authorization Requests",
+      "createdAt": "2026-10-21T02:07:57Z",
+      "updatedAt": "2026-10-21T02:17:47Z",
+      "baseRepository": "oauth-wg/oauth-deferred-token-response",
+      "baseRefName": "main",
+      "baseRefOid": "09cfcd44186eb75c98190e2ddb21488df19d460c",
+      "headRepository": "oauth-wg/oauth-deferred-token-response",
+      "headRefName": "maxpassion-patch-4",
+      "headRefOid": "1e65b330541a3c4bf718f8c148c3dbaef45dc282",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOSeoW_M8AAAABTW8_Ow",
+          "commit": {
+            "abbreviatedOid": "a98f158"
+          },
+          "author": "github-actions",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-10-21T02:08:26Z",
+          "updatedAt": "2026-10-21T02:08:26Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "````suggestion\nthe request body of a Pushed Authorization Request (PAR){{RFC9126}} or\n````",
+              "createdAt": "2026-10-21T02:08:26Z",
+              "updatedAt": "2026-10-21T02:08:26Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 79,
+      "id": "PR_kwDOSeoW_M8AAAABJxCCrg",
+      "title": "JAG-IR redirect_uri",
+      "url": "https://github.com/oauth-wg/oauth-deferred-token-response/pull/79",
+      "state": "OPEN",
+      "author": "maxpassion",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "JAG-IR defined an OPTIONAL `redirect_uri` on the token request. When the interaction completed, the authorization server redirected the user's browser to it. The redirect serves solely as a signal that the interaction is complete\". \n\nWithout it, once a client presents the `interaction_uri` nothing returns the browser to the client.\n\nThis PR closes #59.",
+      "createdAt": "2026-10-21T10:50:43Z",
+      "updatedAt": "2026-10-21T12:27:07Z",
+      "baseRepository": "oauth-wg/oauth-deferred-token-response",
+      "baseRefName": "main",
+      "baseRefOid": "09cfcd44186eb75c98190e2ddb21488df19d460c",
+      "headRepository": "oauth-wg/oauth-deferred-token-response",
+      "headRefName": "maxpassion-patch-5",
+      "headRefOid": "bc2fffabe9358157f671bf4f2ddf3bd4dcb8052f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOSeoW_M8AAAABTbMsPQ",
+          "commit": {
+            "abbreviatedOid": "cdfc704"
+          },
+          "author": "github-actions",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-10-21T10:51:05Z",
+          "updatedAt": "2026-10-21T10:51:06Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "````suggestion\n\n````",
+              "createdAt": "2026-10-21T10:51:05Z",
+              "updatedAt": "2026-10-21T10:51:06Z"
+            }
+          ]
         }
       ]
     }
