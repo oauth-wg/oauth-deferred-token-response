@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-22T00:08:47.466152+00:00",
+  "timestamp": "2026-10-25T00:10:16.976925+00:00",
   "repo": "oauth-wg/oauth-deferred-token-response",
   "labels": [
     {
@@ -3574,7 +3574,7 @@
       "labels": [],
       "body": "Adds the IANA registration request for the new interaction_pending error code added in PR #68.",
       "createdAt": "2026-10-20T15:41:44Z",
-      "updatedAt": "2026-10-20T15:42:03Z",
+      "updatedAt": "2026-10-23T07:20:57Z",
       "baseRepository": "oauth-wg/oauth-deferred-token-response",
       "baseRefName": "main",
       "baseRefOid": "09cfcd44186eb75c98190e2ddb21488df19d460c",
@@ -3586,7 +3586,34 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOSeoW_M8AAAABTyPR5w",
+          "commit": {
+            "abbreviatedOid": "756f762"
+          },
+          "author": "maxwellgerber",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-10-23T00:57:54Z",
+          "updatedAt": "2026-10-23T00:57:54Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOSeoW_M8AAAABT0jbKA",
+          "commit": {
+            "abbreviatedOid": "756f762"
+          },
+          "author": "fkj",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-10-23T07:20:57Z",
+          "updatedAt": "2026-10-23T07:20:57Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 78,
@@ -3602,7 +3629,7 @@
       ],
       "body": "Add RFC 9126 reference for Pushed Authorization Requests",
       "createdAt": "2026-10-21T02:07:57Z",
-      "updatedAt": "2026-10-21T02:17:47Z",
+      "updatedAt": "2026-10-23T00:20:23Z",
       "baseRepository": "oauth-wg/oauth-deferred-token-response",
       "baseRefName": "main",
       "baseRefOid": "09cfcd44186eb75c98190e2ddb21488df19d460c",
@@ -3634,6 +3661,52 @@
               "updatedAt": "2026-10-21T02:08:26Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOSeoW_M8AAAABTu0DRw",
+          "commit": {
+            "abbreviatedOid": "1e65b33"
+          },
+          "author": "gniero",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Pointed out some opportunities for discussion",
+          "createdAt": "2026-10-22T18:39:21Z",
+          "updatedAt": "2026-10-22T20:35:54Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "Perhaps it went away by accident?\n```suggestion\n  parties other than the resource owner.\n```",
+              "createdAt": "2026-10-22T18:39:21Z",
+              "updatedAt": "2026-10-22T20:35:54Z"
+            },
+            {
+              "originalPosition": 24,
+              "body": "I guess this whole paragrah reads a bit oddly - not related to your reference update.\n\nCould we write something like this?\n```\nWhen the preceding request is an authorization request, completion_mode is conveyed like any other authorization request parameter, including within a PAR request body {{RFC9126}} or a JAR Request Object {{RFC9101}}.\n```",
+              "createdAt": "2026-10-22T20:34:46Z",
+              "updatedAt": "2026-10-22T20:35:54Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOSeoW_M8AAAABTyB5Qw",
+          "commit": {
+            "abbreviatedOid": "1e65b33"
+          },
+          "author": "maxwellgerber",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-10-23T00:20:23Z",
+          "updatedAt": "2026-10-23T00:20:23Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "Abbreviations need to be written out in full on first usage per [style guide](https://www.ietf.org/archive/id/draft-rpc-rfc7322bis-03.html#name-abbreviation-rules).\n\nwdyt of:\n```\nWhen the preceding request is an authorization request, `completion_mode` is conveyed like any other authorization request parameter.  Examples include the request body of a Pushed Authorization Request (PAR){{RFC9126}} or\nas a member of a JWT-secured authorization request object (JAR){{RFC9101}}.\n```",
+              "createdAt": "2026-10-23T00:20:23Z",
+              "updatedAt": "2026-10-23T00:20:23Z"
+            }
+          ]
         }
       ]
     },
@@ -3649,7 +3722,7 @@
       "labels": [],
       "body": "JAG-IR defined an OPTIONAL `redirect_uri` on the token request. When the interaction completed, the authorization server redirected the user's browser to it. The redirect serves solely as a signal that the interaction is complete\". \n\nWithout it, once a client presents the `interaction_uri` nothing returns the browser to the client.\n\nThis PR closes #59.",
       "createdAt": "2026-10-21T10:50:43Z",
-      "updatedAt": "2026-10-21T12:27:07Z",
+      "updatedAt": "2026-10-23T07:46:04Z",
       "baseRepository": "oauth-wg/oauth-deferred-token-response",
       "baseRefName": "main",
       "baseRefOid": "09cfcd44186eb75c98190e2ddb21488df19d460c",
@@ -3660,7 +3733,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "fkj",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I agree that we should rethink the parameters to map out which ones are \"compatible\" with each other. We can then try to simplify such that it's only possible to send valid combinations.\r\nI think this functionality is subsumed by the existing `redirect_uri` for grant types that already redirect (notably `authorization_code`, but I guess there could be others as well).\r\n\r\nIf we say that `interaction_required` can't be used with grant types that already interact/redirect, the design would be similar to FiPA. If we say it can be used, it would be more similar to OpenID4VCI interactive authorization, where you can require multiple interactions in a row (e.g. for getting authorization from two different IdPs which is semi-common when issuing government credentials). It becomes pretty complicated to structure/negotiate options if you allow \"trees\" of interaction, and we had to make some simplifying compromises in OpenID4VCI that will probably need to be revisited later.\r\nUnless someone has a compelling use case, I think we should say that you can only do one interaction and that it is out of scope for this spec to do more (though of course you can \"package\" interactions yourself since an AS can do whatever it wants to authorize).\r\n\r\nWith [attestation-based client authentication](https://datatracker.ietf.org/doc/draft-ietf-oauth-attestation-based-client-auth/), it is now becoming possible to have confidential clients (e.g. mobile apps) that don't have a backend. I could imagine that someone would want to do ID-JAG for one of those, though I haven't heard anything concrete.",
+          "createdAt": "2026-10-23T07:46:04Z",
+          "updatedAt": "2026-10-23T07:46:04Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOSeoW_M8AAAABTbMsPQ",
@@ -3681,6 +3762,57 @@
               "updatedAt": "2026-10-21T10:51:06Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOSeoW_M8AAAABToJOPQ",
+          "commit": {
+            "abbreviatedOid": "bc2fffa"
+          },
+          "author": "fkj",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Generally looks good, but I think the language can be tightened a bit.",
+          "createdAt": "2026-10-22T09:34:00Z",
+          "updatedAt": "2026-10-22T09:36:20Z",
+          "comments": [
+            {
+              "originalPosition": 28,
+              "body": "To make the requirements normative:\n\n```suggestion\nIf a `redirect_uri` was provided on the initial token request\n({{token-endpoint-initial-request}}), the authorization server MUST redirect\nthe user's browser to that URI after the interaction is complete. The authorization server MUST NOT include an authorization code or other parameters in the redirect; the redirect serves solely as a signal to the client that the interaction is complete.\n```",
+              "createdAt": "2026-10-22T09:34:00Z",
+              "updatedAt": "2026-10-22T09:36:20Z"
+            },
+            {
+              "originalPosition": 40,
+              "body": "Normative requirement:\n```suggestion\n`redirect_uri` is independent of `deferred_client_notification_endpoint`\n({{client-registration-metadata}}); a client MAY use either or both.\n```",
+              "createdAt": "2026-10-22T09:35:08Z",
+              "updatedAt": "2026-10-22T09:36:20Z"
+            },
+            {
+              "originalPosition": 40,
+              "body": "it's also an option to use neither, right? It might be helpful to clarify that.",
+              "createdAt": "2026-10-22T09:35:28Z",
+              "updatedAt": "2026-10-22T09:36:20Z"
+            },
+            {
+              "originalPosition": 37,
+              "body": "It think these two paragraphs are basically saying the same thing. We could probably consolidate them.",
+              "createdAt": "2026-10-22T09:35:50Z",
+              "updatedAt": "2026-10-22T09:36:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOSeoW_M8AAAABTyOEaw",
+          "commit": {
+            "abbreviatedOid": "bc2fffa"
+          },
+          "author": "maxwellgerber",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "I'm not confident in adding this yet. Can we push this to post `-01`?\n\nSome questions I'd like to answer first:\n* The original JAG-IR draft only used the `redirect_uri` parameter in the token request for JWT Bearer grants. Now with DTR, we're using it for all grant types. How does this work for the `authorization_code` grant type, which already uses the `redirect_uri` parameter? That value _must_ be the callback that received the `code=...` - so we'd be using the same endpoint for two different purposes in the same flow. Should we use a different parameter name? \n* Instead of reusing the redirect URI for the auth code grant, should we add a different \"flavor\" of redirect URI to the client, like OIDC SLO did?\n* Can `interaction_required` or `interaction_uri` be used with the `authorization_code` grant type in the first place? The AS already interacted with the user, does it have the right to interact again?\n* Presumably this is for public browser clients, which do not have a backend and cannot receive a server-to-server notification. But ID-JAG is [not supported for public clients](https://datatracker.ietf.org/doc/draft-ietf-oauth-identity-assertion-authz-grant/#:~:text=This%20specification%20SHOULD%20only%20be%20supported%20for%20confidential%20clients.). So what kind of client / grant type would this make sense for?\n\nMCP's [URL Elicitation](https://modelcontextprotocol.io/specification/2026-07-28/client/elicitation#url-mode-elicitation-requests) feature (which I think of as very similar) does not include a callback mechanism\n\nThere are alternative approaches - we can instruct the client to always open the `interaction_uri` in a new tab + make use of the [page visibility api](https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API) to speed up polling. I'd like to understand more what the specific motivating usecases are and whether we can solve them a different way.",
+          "createdAt": "2026-10-23T00:54:27Z",
+          "updatedAt": "2026-10-23T00:54:27Z",
+          "comments": []
         }
       ]
     }
