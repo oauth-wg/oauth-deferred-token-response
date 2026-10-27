@@ -1825,11 +1825,8 @@ client that omits it on the preceding request can still opt in at the
 token endpoint, and the authorization server <span class="bcp14">MUST NOT</span> reject a token
 request carrying <code>completion_mode=deferred</code> solely because no hint was
 received earlier.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
-<p id="section-5.2-2">Where the authorization request is not sent directly to the
-authorization endpoint, <code>completion_mode</code> is conveyed wherever the
-request's other authorization parameters are conveyed — for example, in
-the request body of a Pushed Authorization Request (PAR)<span>[<a href="#RFC9126" class="cite xref">RFC9126</a>]</span> or
-as a member of a JWT-secured authorization request object (JAR).<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.2-2">When the preceding request is an authorization request, <code>completion_mode</code> is conveyed like any other authorization request parameter.  Examples include the request body of a Pushed Authorization Request (PAR)<span>[<a href="#RFC9126" class="cite xref">RFC9126</a>]</span> or
+as a member of a JWT-secured authorization request object (JAR)<span>[<a href="#RFC9101" class="cite xref">RFC9101</a>]</span>.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
 <p id="section-5.2-3">An authorization server <span class="bcp14">MAY</span> act on the hint by selecting a
 deferral-aware path for the originating grant — for example, by
 collecting different consent from the resource owner, by presenting a
@@ -3483,6 +3480,10 @@ IETF for token endpoint response usage defined by this specification<a href="#se
 <dt id="RFC8705">[RFC8705]</dt>
         <dd>
 <span class="refAuthor">Campbell, B.</span>, <span class="refAuthor">Bradley, J.</span>, <span class="refAuthor">Sakimura, N.</span>, and <span class="refAuthor">T. Lodderstedt</span>, <span class="refTitle">"OAuth 2.0 Mutual-TLS Client Authentication and Certificate-Bound Access Tokens"</span>, <span class="seriesInfo">RFC 8705</span>, <span class="seriesInfo">DOI 10.17487/RFC8705</span>, <time datetime="2020-02" class="refDate">February 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8705">https://www.rfc-editor.org/rfc/rfc8705</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9101">[RFC9101]</dt>
+        <dd>
+<span class="refAuthor">Sakimura, N.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">M. Jones</span>, <span class="refTitle">"The OAuth 2.0 Authorization Framework: JWT-Secured Authorization Request (JAR)"</span>, <span class="seriesInfo">RFC 9101</span>, <span class="seriesInfo">DOI 10.17487/RFC9101</span>, <time datetime="2021-08" class="refDate">August 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9101">https://www.rfc-editor.org/rfc/rfc9101</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9126">[RFC9126]</dt>
         <dd>
