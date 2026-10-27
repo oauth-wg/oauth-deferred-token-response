@@ -54,6 +54,7 @@ normative:
   RFC6750:
   RFC8628:
   RFC9126:
+  RFC9101:
   RFC8705:
   OAUTH-2.1: I-D.draft-ietf-oauth-v2-1
 
