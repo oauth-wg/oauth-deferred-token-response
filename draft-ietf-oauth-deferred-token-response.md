@@ -108,7 +108,7 @@ a token response or an error response.
 However, some authorization decisions cannot complete synchronously:
 
 - Fraud Prevention: Sensitive operations may trigger manual review by
-  ties other than the resource owner.
+  parties other than the resource owner.
 
 - ID Verification: Users may submit copies of physical credentials
   during onboarding or step-up. Verification by the authorization server
