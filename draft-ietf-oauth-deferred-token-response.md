@@ -438,11 +438,8 @@ token endpoint, and the authorization server MUST NOT reject a token
 request carrying `completion_mode=deferred` solely because no hint was
 received earlier.
 
-Where the authorization request is not sent directly to the
-authorization endpoint, `completion_mode` is conveyed wherever the
-request's other authorization parameters are conveyed — for example, in
-the request body of a Pushed Authorization Request (PAR){{RFC9126}} or
-as a member of a JWT-secured authorization request object (JAR).
+ When the preceding request is an authorization request, `completion_mode` is conveyed like any other authorization request parameter.  Examples include the request body of a Pushed Authorization Request (PAR){{RFC9126}} or
+as a member of a JWT-secured authorization request object (JAR){{RFC9101}}.
 
 An authorization server MAY act on the hint by selecting a
 deferral-aware path for the originating grant — for example, by
