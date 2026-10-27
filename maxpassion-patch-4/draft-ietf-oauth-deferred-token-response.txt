@@ -5,8 +5,8 @@
 Web Authorization Protocol                     G. de Oliveira Niero, Ed.
 Internet-Draft                                                      Itaú
 Intended status: Standards Track                             D. Liu, Ed.
-Expires: 24 April 2027                                     Alibaba Group
-                                                         21 October 2026
+Expires: 30 April 2027                                     Alibaba Group
+                                                         27 October 2026
 
 
                         Deferred Token Response
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 April 2027.
+   This Internet-Draft will expire on 30 April 2027.
 
 Copyright Notice
 
@@ -162,7 +162,7 @@ Table of Contents
    However, some authorization decisions cannot complete synchronously:
 
    *  Fraud Prevention: Sensitive operations may trigger manual review
-      by ties other than the resource owner.
+      by parties other than the resource owner.
 
    *  ID Verification: Users may submit copies of physical credentials
       during onboarding or step-up.  Verification by the authorization
