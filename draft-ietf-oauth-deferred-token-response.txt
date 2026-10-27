@@ -5,8 +5,8 @@
 Web Authorization Protocol                     G. de Oliveira Niero, Ed.
 Internet-Draft                                                      Itaú
 Intended status: Standards Track                             D. Liu, Ed.
-Expires: 23 April 2027                                     Alibaba Group
-                                                         20 October 2026
+Expires: 30 April 2027                                     Alibaba Group
+                                                         27 October 2026
 
 
                         Deferred Token Response
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 April 2027.
+   This Internet-Draft will expire on 30 April 2027.
 
 Copyright Notice
 
@@ -480,11 +480,11 @@ Table of Contents
    request carrying completion_mode=deferred solely because no hint was
    received earlier.
 
-   Where the authorization request is not sent directly to the
-   authorization endpoint, completion_mode is conveyed wherever the
-   request's other authorization parameters are conveyed — for example,
-   in the request body of a Pushed Authorization Request (PAR) or as a
-   member of a JWT-secured authorization request object (JAR).
+   When the preceding request is an authorization request,
+   completion_mode is conveyed like any other authorization request
+   parameter.  Examples include the request body of a Pushed
+   Authorization Request (PAR)[RFC9126] or as a member of a JWT-secured
+   authorization request object (JAR)[RFC9101].
 
    An authorization server MAY act on the hint by selecting a deferral-
    aware path for the originating grant — for example, by collecting
@@ -1808,6 +1808,16 @@ token=LRGidcSAeVs_xYpEDt5pNx0A0TBr7qPHbh_Se6pfdf4
               and Certificate-Bound Access Tokens", RFC 8705,
               DOI 10.17487/RFC8705, February 2020,
               <https://www.rfc-editor.org/rfc/rfc8705>.
+
+   [RFC9101]  Sakimura, N., Bradley, J., and M. Jones, "The OAuth 2.0
+              Authorization Framework: JWT-Secured Authorization Request
+              (JAR)", RFC 9101, DOI 10.17487/RFC9101, August 2021,
+              <https://www.rfc-editor.org/rfc/rfc9101>.
+
+   [RFC9126]  Lodderstedt, T., Campbell, B., Sakimura, N., Tonge, D.,
+              and F. Skokan, "OAuth 2.0 Pushed Authorization Requests",
+              RFC 9126, DOI 10.17487/RFC9126, September 2021,
+              <https://www.rfc-editor.org/rfc/rfc9126>.
 
    [RFC9449]  Fett, D., Campbell, B., Bradley, J., Lodderstedt, T.,
               Jones, M., and D. Waite, "OAuth 2.0 Demonstrating Proof of
