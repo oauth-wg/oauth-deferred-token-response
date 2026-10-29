@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-25T00:10:16.976925+00:00",
+  "timestamp": "2026-10-29T00:07:22.163272+00:00",
   "repo": "oauth-wg/oauth-deferred-token-response",
   "labels": [
     {
@@ -3574,7 +3574,7 @@
       "labels": [],
       "body": "Adds the IANA registration request for the new interaction_pending error code added in PR #68.",
       "createdAt": "2026-10-20T15:41:44Z",
-      "updatedAt": "2026-10-23T07:20:57Z",
+      "updatedAt": "2026-10-27T15:14:03Z",
       "baseRepository": "oauth-wg/oauth-deferred-token-response",
       "baseRefName": "main",
       "baseRefOid": "09cfcd44186eb75c98190e2ddb21488df19d460c",
@@ -3585,7 +3585,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "maxpassion",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@gniero  If everyone is OK with this, I suggest we merge it and defer #79 to the discussion at IETF 127. \r\n\r\nWe can then cut the -01 version and submit it before the cutoff.",
+          "createdAt": "2026-10-27T15:14:03Z",
+          "updatedAt": "2026-10-27T15:14:03Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOSeoW_M8AAAABTyPR5w",
@@ -3620,7 +3628,7 @@
       "id": "PR_kwDOSeoW_M8AAAABJsL23w",
       "title": "Add RFC 9126 reference for Pushed Authorization Requests",
       "url": "https://github.com/oauth-wg/oauth-deferred-token-response/pull/78",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "maxpassion",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -3629,18 +3637,28 @@
       ],
       "body": "Add RFC 9126 reference for Pushed Authorization Requests",
       "createdAt": "2026-10-21T02:07:57Z",
-      "updatedAt": "2026-10-23T00:20:23Z",
+      "updatedAt": "2026-10-27T15:01:31Z",
       "baseRepository": "oauth-wg/oauth-deferred-token-response",
       "baseRefName": "main",
       "baseRefOid": "09cfcd44186eb75c98190e2ddb21488df19d460c",
       "headRepository": "oauth-wg/oauth-deferred-token-response",
       "headRefName": "maxpassion-patch-4",
-      "headRefOid": "1e65b330541a3c4bf718f8c148c3dbaef45dc282",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "headRefOid": "f2ea000435a052730f101cae1a82779a6d1d9a80",
+      "closedAt": "2026-10-27T15:01:31Z",
+      "mergedAt": "2026-10-27T15:01:31Z",
+      "mergedBy": "maxpassion",
+      "mergeCommit": {
+        "oid": "b054a80b5c3c70c02763a0835924682c8b68dd77"
+      },
+      "comments": [
+        {
+          "author": "maxpassion",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Applied the suggestions, thanks! Merging now.",
+          "createdAt": "2026-10-27T15:01:17Z",
+          "updatedAt": "2026-10-27T15:01:17Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOSeoW_M8AAAABTW8_Ow",
@@ -3707,6 +3725,26 @@
               "updatedAt": "2026-10-23T00:20:23Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOSeoW_M8AAAABUeiMwg",
+          "commit": {
+            "abbreviatedOid": "8f1b3cf"
+          },
+          "author": "maxpassion",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-10-27T14:53:13Z",
+          "updatedAt": "2026-10-27T14:53:21Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\n  RFC9126:\n  RFC9101:\n```",
+              "createdAt": "2026-10-27T14:53:13Z",
+              "updatedAt": "2026-10-27T14:53:21Z"
+            }
+          ]
         }
       ]
     },
@@ -3722,7 +3760,7 @@
       "labels": [],
       "body": "JAG-IR defined an OPTIONAL `redirect_uri` on the token request. When the interaction completed, the authorization server redirected the user's browser to it. The redirect serves solely as a signal that the interaction is complete\". \n\nWithout it, once a client presents the `interaction_uri` nothing returns the browser to the client.\n\nThis PR closes #59.",
       "createdAt": "2026-10-21T10:50:43Z",
-      "updatedAt": "2026-10-23T07:46:04Z",
+      "updatedAt": "2026-10-27T09:34:31Z",
       "baseRepository": "oauth-wg/oauth-deferred-token-response",
       "baseRefName": "main",
       "baseRefOid": "09cfcd44186eb75c98190e2ddb21488df19d460c",
@@ -3740,6 +3778,13 @@
           "body": "I agree that we should rethink the parameters to map out which ones are \"compatible\" with each other. We can then try to simplify such that it's only possible to send valid combinations.\r\nI think this functionality is subsumed by the existing `redirect_uri` for grant types that already redirect (notably `authorization_code`, but I guess there could be others as well).\r\n\r\nIf we say that `interaction_required` can't be used with grant types that already interact/redirect, the design would be similar to FiPA. If we say it can be used, it would be more similar to OpenID4VCI interactive authorization, where you can require multiple interactions in a row (e.g. for getting authorization from two different IdPs which is semi-common when issuing government credentials). It becomes pretty complicated to structure/negotiate options if you allow \"trees\" of interaction, and we had to make some simplifying compromises in OpenID4VCI that will probably need to be revisited later.\r\nUnless someone has a compelling use case, I think we should say that you can only do one interaction and that it is out of scope for this spec to do more (though of course you can \"package\" interactions yourself since an AS can do whatever it wants to authorize).\r\n\r\nWith [attestation-based client authentication](https://datatracker.ietf.org/doc/draft-ietf-oauth-attestation-based-client-auth/), it is now becoming possible to have confidential clients (e.g. mobile apps) that don't have a backend. I could imagine that someone would want to do ID-JAG for one of those, though I haven't heard anything concrete.",
           "createdAt": "2026-10-23T07:46:04Z",
           "updatedAt": "2026-10-23T07:46:04Z"
+        },
+        {
+          "author": "maxpassion",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Based on the discussion so far, I'm fine with pushing this to post -01.\r\n\r\nOne point on the design origin: the redirect_uri in JAG-IR was designed specifically for the ID-JAG grant. Extending it to other grant types raises the parameter compatibility issues discussed above, and needs more thought.\r\n\r\nWe can have a deeper discussion in IETF 127.",
+          "createdAt": "2026-10-27T09:34:31Z",
+          "updatedAt": "2026-10-27T09:34:31Z"
         }
       ],
       "reviews": [
