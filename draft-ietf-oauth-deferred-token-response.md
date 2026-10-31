@@ -1710,6 +1710,14 @@ response usage for the deferred-pending state defined in
   IETF for token endpoint response usage defined by this specification
 - Specification document(s): OpenID Connect Core 1.0; this specification
 
+This specification also registers a new error code:
+
+- Error name: `interaction_pending`
+- Error usage location: token endpoint response
+- Related protocol extension: deferred token response
+- Change controller: IETF
+- Specification document(s): this specification
+
 --- back
 
 # Use Cases
