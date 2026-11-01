@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-29T00:07:22.163272+00:00",
+  "timestamp": "2026-11-01T00:07:58.153844+00:00",
   "repo": "oauth-wg/oauth-deferred-token-response",
   "labels": [
     {
@@ -3567,24 +3567,26 @@
       "id": "PR_kwDOSeoW_M8AAAABJljKJQ",
       "title": "Add interaction_pending error code in IANA section",
       "url": "https://github.com/oauth-wg/oauth-deferred-token-response/pull/77",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "maxpassion",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Adds the IANA registration request for the new interaction_pending error code added in PR #68.",
       "createdAt": "2026-10-20T15:41:44Z",
-      "updatedAt": "2026-10-27T15:14:03Z",
+      "updatedAt": "2026-10-31T14:36:07Z",
       "baseRepository": "oauth-wg/oauth-deferred-token-response",
       "baseRefName": "main",
       "baseRefOid": "09cfcd44186eb75c98190e2ddb21488df19d460c",
       "headRepository": "oauth-wg/oauth-deferred-token-response",
       "headRefName": "maxpassion-patch-2",
       "headRefOid": "756f76266fc1be7be2733c27724946b17d297cb1",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-10-31T14:36:07Z",
+      "mergedAt": "2026-10-31T14:36:07Z",
+      "mergedBy": "maxpassion",
+      "mergeCommit": {
+        "oid": "e7d1b9bbbaab6ec0d7161565e3a24df86071e0b6"
+      },
       "comments": [
         {
           "author": "maxpassion",
@@ -3592,6 +3594,13 @@
           "body": "@gniero  If everyone is OK with this, I suggest we merge it and defer #79 to the discussion at IETF 127. \r\n\r\nWe can then cut the -01 version and submit it before the cutoff.",
           "createdAt": "2026-10-27T15:14:03Z",
           "updatedAt": "2026-10-27T15:14:03Z"
+        },
+        {
+          "author": "gniero",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I agree merging this and discussing the #79 later",
+          "createdAt": "2026-10-30T18:55:23Z",
+          "updatedAt": "2026-10-30T18:55:23Z"
         }
       ],
       "reviews": [
