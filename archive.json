@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-11-01T00:07:58.153844+00:00",
+  "timestamp": "2026-11-03T00:06:21.549788+00:00",
   "repo": "oauth-wg/oauth-deferred-token-response",
   "labels": [
     {
@@ -1348,6 +1348,22 @@
       "body": "The consolidated overview diagram after merging the specs is quite complex and it is not easy to see what the intended flows actually are.\n\nWe should consider splitting it into three different diagrams to make it easier to understand the options, as agreed in discussion of #74.",
       "createdAt": "2026-10-19T09:34:07Z",
       "updatedAt": "2026-10-19T09:34:07Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 80,
+      "id": "I_kwDOSeoW_M8AAAABbvKVSw",
+      "title": "Clarify whether `deferred_interactive` alone permits deferral",
+      "url": "https://github.com/oauth-wg/oauth-deferred-token-response/issues/80",
+      "state": "OPEN",
+      "author": "mcguinness",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "DTR -01 is inconsistent about this request:\n\n```text\ncompletion_mode=deferred_interactive\n```\n\nSome text treats `deferred_interactive` as an opt-in to deferral on its own:\n\n- Section 3, step 1: the client opts in \"by including one of the supported values of the completion_mode parameter\".\n- Section 5.1: with `deferred_interactive`, the client \"is willing to accept a deferred response\", and synchronous handling applies only when the parameter \"includes neither value\".\n- Section 13.2: the registry entry says the client \"accepts a deferred response\".\n- Issue #58, which introduced the value, gave it deferred polling as well as interaction.\n\nThe processing rules require `deferred`:\n\n- Section 5.1: \"The client signals opt-in to DTR by including deferred among the completion_mode values\".\n- Section 5.3: the authorization server \"MUST NOT defer a response to a request whose completion_mode does not include deferred\".\n- Sections 6.1.1 and 6.3.1 treat a request whose `completion_mode` does not include `deferred` as synchronous, and Section 6.4 defers only a request whose `completion_mode` includes `deferred`.\n\nUnder those rules, interactive deferral needs `completion_mode=deferred deferred_interactive`.\n\nThe examples differ again. The Section 3 figure and use cases A.6 to A.8 send only `completion_mode=deferred` and then receive `interaction_required`, although under #58 `deferred` does not signal that the client can handle interaction.\n\nCould the specification pick one interpretation and align the parameter definition, the processing rules in Sections 5.3, 6.1.1, 6.3.1 and 6.4, the registry descriptions, and the examples?\n\n1. `deferred_interactive` opts into deferral on its own and also signals that the client can handle interaction.\n2. `deferred` is always required. `deferred_interactive` only adds the interaction capability.\n\nI prefer the first, since it matches Sections 3, 5.1 and 13.2 and the design in #58, and it avoids requiring both values. Either way, it would help to state whether a server may return `interaction_required` to a client whose `completion_mode` lacks `deferred_interactive`, and to have the examples that return it send `deferred_interactive`.\n\nReference: [DTR -01](https://www.ietf.org/archive/id/draft-ietf-oauth-deferred-token-response-01.txt)\n",
+      "createdAt": "2026-11-02T04:45:17Z",
+      "updatedAt": "2026-11-02T04:45:17Z",
       "closedAt": null,
       "comments": []
     }
