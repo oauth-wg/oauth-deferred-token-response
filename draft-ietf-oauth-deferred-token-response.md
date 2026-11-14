@@ -21,7 +21,7 @@ venue:
   type: Working Group
   mail: oauth@ietf.org
   arch: https://mailarchive.ietf.org/arch/browse/oauth/
-  github: "oauth-wg/deferred-token-response"
+  github: "oauth-wg/oauth-deferred-token-response"
   latest: "https://datatracker.ietf.org/doc/draft-ietf-oauth-deferred-token-response/"
 
 author:
