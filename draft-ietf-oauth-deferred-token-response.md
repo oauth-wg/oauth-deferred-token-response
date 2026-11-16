@@ -164,15 +164,14 @@ between the client and the authorization server is defined here.
 This specification defines the following terms:
 
 deferral code
-: A unique, opaque, server-generated identifier that represents a
-  single pending token request. The deferral code is carried
-  in the `deferral_code` member of the deferred response
-  ({{token-endpoint-deferred-response}}) and is identified, when
-  used as a `token_type_hint` at the revocation endpoint, by the URI
-  `urn:ietf:params:oauth:token-type:deferral-code`. The deferral
-  code is bound to the issuing client and to a sender-constraining
-  key per {{sender-constraint-requirements}}, and entitles the bound
-  party to retrieve the eventual token response.
+: An opaque identifier issued by the authorization server in the
+  deferred response ({{token-endpoint-deferred-response}}) that
+  references a single pending token request. The client presents
+  the deferral code to poll for the eventual token response at the
+  token endpoint, or to cancel the pending request at the revocation
+  endpoint. The deferral code is bound to the client it was issued
+  to and, when the initial token request was sender-constrained, to
+  the same key or certificate ({{sender-constraint-requirements}}).
 
 polling interval
 : The minimum number of seconds, conveyed in the `interval` parameter
