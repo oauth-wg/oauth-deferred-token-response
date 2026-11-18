@@ -641,6 +641,12 @@ The client MAY also include the following parameter:
   A client that registers a `deferred_client_notification_endpoint`
   SHOULD include a `client_notification_token`; without one, the client
   cannot authenticate inbound callbacks (see {{callback-endpoint-validation}}).
+`redirect_uri`
+: OPTIONAL. The URI to which the authorization server will redirect the
+  user's browser after the interaction is complete. If the client
+  provides a `redirect_uri`, the authorization server MUST validate it
+  against the client's registered redirect URIs, consistent with
+  {{Section 2.3.1 of OAUTH-2.1}}.
 
 The response to this request is one of:
 
@@ -1115,6 +1121,30 @@ to be used during Client Registration as defined in {{RFC7591}}:
   be an HTTPS URL. A client that does not register this endpoint
   retrieves the final token response by polling the token endpoint.
 
+# Redirect Notification {#redirect-notification}
+
+Callback Notification is server-to-server and does not involve the user's
+browser. Where the client presented an `interaction_uri` to the user, the
+browser is at the authorization server when the interaction concludes, and
+a browser-based client has no way to bring it back.
+
+If a `redirect_uri` was provided on the initial token request
+({{token-endpoint-initial-request}}), the authorization server redirects
+the user's browser to that URI after the interaction is complete. No
+authorization code or other parameters are included in the redirect; the
+redirect serves solely as a signal that the interaction is complete.
+
+Upon receiving the redirect, the client SHOULD immediately retry its
+polling request ({{token-endpoint-polling}}). The signal indicates that the
+interaction has completed, not that the deferred request has resolved; the
+client obtains the outcome from the token endpoint as it would otherwise.
+
+Any party able to cause a navigation to the registered redirect URI can
+produce the same signal, so a client MUST NOT treat arrival there as
+confirmation of the outcome and MUST NOT stop polling on account of it.
+
+`redirect_uri` is independent of `deferred_client_notification_endpoint`
+({{client-registration-metadata}}); a client may use either or both.
 
 # Cancellation {#cancellation}
 
