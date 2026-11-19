@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-11-17T00:06:12.103690+00:00",
+  "timestamp": "2026-11-19T00:06:23.725628+00:00",
   "repo": "oauth-wg/oauth-deferred-token-response",
   "labels": [
     {
@@ -841,7 +841,7 @@
       "labels": [],
       "body": "## Problem\n\nToday, when an authorization server defers a request for a grant that has a preceding endpoint, the preceding endpoint always returns its normal response (typically an authorization code), and the deferral decision is observed only at the token endpoint. `completion_mode=deferred` on the preceding request is a hint that influences the AS's later behavior but does not change the preceding endpoint's response shape.\n\nThis is correct for cases where the deferral is downstream of the preceding endpoint's normal operation. It is awkward for cases where the *authorization decision itself* is what is deferred:\n\n- Front-channel step-up where the AS cannot decide whether to authorize until an out-of-band approval completes.\n- Deferred ID Token issuance where claim verification follows the redirect.\n\nIn those cases, issuing an authorization code commits the AS to a decision it has not yet made. The code is later either redeemed against a deferred outcome (which works but is semantically odd) or unused (which leaks a credential).\n\n## Solution shape\n\nAn OPTIONAL extension that lets the preceding endpoint return a deferred response directly, in place of the originating grant's normal response. Constraints:\n\n- OPTIONAL. Authorization servers MUST be able to ignore the extension entirely and use the existing hint-only model. Discoverable via authorization server metadata.\n- Does not change the default behavior of the preceding endpoint or the hint mechanism currently in \u00a74.2.\n- Preserves the substrate's invariants (continuation through the token endpoint, sender-constraining continuity, polling availability).\n- Defines the wire shape only for the authorization endpoint in this iteration; other preceding endpoints (device, FIPA) can be addressed in follow-up profiles.\n- Includes the PKCE handshake for public clients that need to defer at the authorization endpoint (verifier presented on the first polling request, not on subsequent ones).\n\n## Plan\n\nPR to follow.",
       "createdAt": "2026-06-24T05:54:52Z",
-      "updatedAt": "2026-07-20T12:26:15Z",
+      "updatedAt": "2026-11-18T18:29:09Z",
       "closedAt": null,
       "comments": [
         {
@@ -892,6 +892,13 @@
           "body": "> I think it is a nice approach. We should probably add some considerations about `client_notification_token`. It should not be informed in clear at the authorization endpoint\n\nGood point. I think we could require PAR to solve this?",
           "createdAt": "2026-07-20T12:26:15Z",
           "updatedAt": "2026-07-20T12:26:15Z"
+        },
+        {
+          "author": "identitymonk",
+          "authorAssociation": "NONE",
+          "body": "The authorization code capture the completion of the consent if a user is involved. Whatever is decided, the authorization code can only represent that. The possession of an Authorization Code has never been the guarantee to get tokens issued. Easy example is that Authorization Code might be expired.\n\nBefore issuance, the AS is given one last capability to pause and think about what must finally be issued. This allows for enrichment of claims, transformation/normalization of information, selective disclosure processing, AND signals evaluation for posture that might have change in between authorization request time and token request time.\n\nAs such that is where the deferred response is required. On top of that it gives a consistent mechanism for all grants even the ones not involving a resource owner.  ",
+          "createdAt": "2026-11-18T18:29:09Z",
+          "updatedAt": "2026-11-18T18:29:09Z"
         }
       ]
     },
